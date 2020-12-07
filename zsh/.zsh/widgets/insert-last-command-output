@@ -1,0 +1,10 @@
+# Insert the output from the previous command.
+
+insert-last-command-output() {
+    emulate -L zsh
+    LBUFFER+="$(eval $history[$((HISTCMD-1))])"
+}
+
+zmodload -i zsh/parameter
+zle -N insert-last-command-output
+bindkey "^L" insert-last-command-output

@@ -1,0 +1,12 @@
+# Prepend the current command with sudo.
+
+function prepend-sudo() {
+    emulate -L zsh
+
+    if [[ $BUFFER != "sudo "* ]]; then
+        BUFFER="sudo $BUFFER"; CURSOR+=5
+    fi
+}
+
+zle -N prepend-sudo
+bindkey "^[s" prepend-sudo

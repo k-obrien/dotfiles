@@ -1,0 +1,13 @@
+# Print entire history or, optionally, search it for given term.
+
+function hist() {
+    emulate -L zsh
+
+    if [ -z "$*" ]; then
+        # Print entire history if no parameters were passed
+        history -i 1
+    else
+        # Otherwise search on the given parameters
+        history -i 1 | egrep --color=auto "$@"
+    fi
+}

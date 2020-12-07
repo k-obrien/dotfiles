@@ -1,0 +1,18 @@
+[submodule "hammerspoon/.hammerspoon/Spoons/StateActor.spoon"]
+	path = hammerspoon/.hammerspoon/Spoons/StateActor.spoon
+	url = git@github.com:k-obrien/StateActor.spoon.git
+[submodule "hammerspoon/.hammerspoon/Spoons/SmudgedGlass.spoon"]
+	path = hammerspoon/.hammerspoon/Spoons/SmudgedGlass.spoon
+	url = https://github.com/k-obrien/SmudgedGlass.spoon.git
+[submodule "hammerspoon/.hammerspoon/Spoons/NumPad.spoon"]
+	path = hammerspoon/.hammerspoon/Spoons/NumPad.spoon
+	url = https://github.com/k-obrien/NumPad.spoon.git
+[submodule "zsh/.zsh/zsh.d/autosuggestions"]
+	path = zsh/.zsh/zsh.d/autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "zsh/.zsh/zsh.d/async"]
+	path = zsh/.zsh/zsh.d/async
+	url = https://github.com/mafredri/zsh-async.git
+[submodule "zsh/.zsh/zsh.d/autopair"]
+	path = zsh/.zsh/zsh.d/autopair
+	url = https://github.com/hlissner/zsh-autopair.git

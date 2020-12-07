@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+error_exit() {
+    echo "$1" >&2
+    exit 1
+}
+
+# Set web root to current directory by default
+WWW_ROOT="."
+
+# Check for a valid python installation
+type python &> /dev/null || error_exit "Valid python installation not found."
+
+# Set web root to any supplied directory
+[[ -n "$1" ]] && WWW_ROOT="$1"
+
+# Exit if the given directory doesn't exist
+cd "$WWW_ROOT" &> /dev/null || error_exit "No such directory."
+
+# Check the files in the web root directory for HTML content
+grep -Eiqs "<x?html?>" -- * || error_exit "No HTML files found."
+
+# Start the server and open a browser
+# /usr/bin/env python -m SimpleHTTPServer 8000 &
+# open http://localhost:8000

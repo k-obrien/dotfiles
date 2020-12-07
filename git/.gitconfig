@@ -1,0 +1,23 @@
+[include]
+    path = ~/.gitconfig.local
+[user]
+    name = Kieran O'Brien
+[core]
+    autocrlf = input
+    excludesfile = ~/.gitignore_global
+    editor = code --wait
+[commit]
+    gpgsign = true
+[diff]
+    tool = studio
+[difftool]
+    prompt = false
+[difftool "studio"]
+    cmd = studio diff "$LOCAL" "$REMOTE"
+[merge]
+    tool = studio
+[mergetool]
+    prompt = false
+[mergetool "studio"]
+    cmd = studio merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+    trustExitCode = true
