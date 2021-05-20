@@ -21,5 +21,5 @@ cd "$WWW_ROOT" &> /dev/null || error_exit "No such directory."
 grep -Eiqs "<x?html?>" -- * || error_exit "No HTML files found."
 
 # Start the server and open a browser
-# /usr/bin/env python -m SimpleHTTPServer 8000 &
-# open http://localhost:8000
+/usr/bin/env python -m SimpleHTTPServer 8000 &
+open http://localhost:8000
