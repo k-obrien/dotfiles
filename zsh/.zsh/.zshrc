@@ -109,10 +109,10 @@ autoload -Uz insert-last-command-output && insert-last-command-output
 # Define words as alphanumerics only
 autoload -U select-word-style && select-word-style bash
 
-# Edit current command in default editor
+# Edit current command in default editor (Opt+E)
 autoload -U edit-command-line && zle -N edit-command-line && bindkey "^[e" edit-command-line
 
-bindkey "^q" push-line-or-edit
+bindkey "^q" push-line-or-edit      # Ctrl+Q
 bindkey "^[[A" up-line-or-search    # Up arrow
 bindkey "^[[B" down-line-or-search  # Down arrow
 
