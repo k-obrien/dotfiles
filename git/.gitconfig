@@ -21,3 +21,5 @@
 [mergetool "studio"]
     cmd = studio merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     trustExitCode = true
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
