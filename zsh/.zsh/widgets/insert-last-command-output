@@ -1,6 +1,6 @@
 # Insert the output from the previous command.
 
-insert-last-command-output() {
+function insert-last-command-output() {
     emulate -L zsh
     LBUFFER+="$(eval $history[$((HISTCMD-1))])"
 }
