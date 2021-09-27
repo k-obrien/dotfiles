@@ -17,6 +17,28 @@ if hs.spoons.isInstalled("ReloadConfiguration") then
 	spoon.ReloadConfiguration:start()
 end
 
+function applyWindowLayout()
+    local externalScreen = "LG ULTRAWIDE"
+    local internalScreen = "Built-in Retina Display"
+    local numberOfScreens = #hs.screen.allScreens()
+    
+    local dualScreenLayout = {
+        { "Firefox", nil, externalScreen, { 0, 0, 0.35, 1 }, nil, nil },
+        { "Android Studio", nil, externalScreen, { 0.35, 0, 0.65, 1 }, nil, nil },
+        { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil }
+    }
+    
+    local singleScreenLayout = {
+        { "Firefox", nil, internalScreen, hs.layout.maximized, nil, nil },
+        { "Android Studio", nil, internalScreen, hs.layout.maximized, nil, nil },
+        { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil }
+    }
+    
+    hs.layout.apply(numberOfScreens == 1 and singleScreenLayout or dualScreenLayout)
+end
+
+hs.screen.watcher.new(applyWindowLayout)
+
 function setPreferredAudioOutputDevice()
 	local currentUser = hs.caffeinate.sessionProperties()["kCGSSessionUserNameKey"]
 	local preferredDevice = currentUser == "kieran.obrien" and "MacBook Pro Speakers" or "LG ULTRAWIDE"
@@ -57,6 +79,9 @@ end
 
 hs.hotkey.alertDuration = 0
 hs.hotkey.bind(modifier, "a", showHelp, hs.alert.closeAll)
+
+-- Layout windows
+hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
 
 -- Open a terminal
 hs.hotkey.bind(modifier, "t", "Terminal", partial(hs.execute, "open -a iterm"))
