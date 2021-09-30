@@ -1,0 +1,8 @@
+# Dispatch key event input to the Android Debug Bridge.
+
+function adbkey() {
+    emulate -L zsh
+    local repeat=1
+    [[ "$2" =~ ^[0-9]+$ ]] && repeat="$2"
+    repeat $repeat adbin keyevent "$1"
+}

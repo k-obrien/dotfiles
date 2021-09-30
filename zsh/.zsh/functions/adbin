@@ -1,0 +1,6 @@
+# Dispatch input to the Android Debug Bridge.
+
+function adbin() {
+    emulate -L zsh
+    adb shell input "$*"
+}

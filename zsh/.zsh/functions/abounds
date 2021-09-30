@@ -1,0 +1,12 @@
+# Toggle layout bounds visibility on Android device.
+
+function abounds() {
+    emulate -L zsh
+    if [[ "$1" == "true" || "$1" == "false" ]]; then
+        adb shell setprop debug.layout "$1"
+        adb shell service call activity 1599295570 > /dev/null
+    else
+        echo "Expected true or false."
+        return 1
+    fi
+}

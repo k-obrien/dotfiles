@@ -96,6 +96,12 @@ autoload -Uz hist       # Print entire history or, optionally, search it for a g
 autoload -Uz shist      # Enable interactive history search
 autoload -Uz vnc        # Establish a VNC session via Screen Sharing
 autoload -Uz xmanpage   # Open man pages in separate terminal window
+autoload -Uz aanimscl   # Set animation scale on Android device
+autoload -Uz adbin      # Dispatch input to ADB
+autoload -Uz adbtype    # Dispatch text input to ADB
+autoload -Uz adbkey     # Dispatch key input to ADB
+autoload -Uz adbtap     # Dispatch touch input to ADB
+autoload -Uz abounds    # Toggle layout bounds visibility on Android device
 
 # Enable prompt customisation
 autoload -Uz promptinit && promptinit && prompt kilo
