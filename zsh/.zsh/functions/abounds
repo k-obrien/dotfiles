@@ -2,11 +2,7 @@
 
 function abounds() {
     emulate -L zsh
-    if [[ "$1" == "true" || "$1" == "false" ]]; then
-        adb shell setprop debug.layout "$1"
-        adb shell service call activity 1599295570 > /dev/null
-    else
-        echo "Expected true or false."
-        return 1
-    fi
+    local arg=$([[ $(adb shell getprop debug.layout) == "true" ]] && echo "false" || echo "true")
+    adb shell setprop debug.layout "$arg"
+    adb shell service call activity 1599295570 > /dev/null
 }
