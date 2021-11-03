@@ -84,13 +84,13 @@ hs.hotkey.bind(modifier, "a", showHelp, hs.alert.closeAll)
 hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
 
 -- Open a terminal
-hs.hotkey.bind(modifier, "t", "Terminal", partial(hs.execute, "open -a iterm"))
+hs.hotkey.bind(modifier, "t", "Terminal", partial(hs.application.launchOrFocus, "iTerm"))
 
 -- Open a text editor
-hs.hotkey.bind(modifier, "e", "Text Editor", partial(hs.execute, "open -a 'Visual Studio Code'"))
+hs.hotkey.bind(modifier, "e", "Text Editor", partial(hs.application.launchOrFocus, "Visual Studio Code"))
 
 -- Open Finder to home
-hs.hotkey.bind(modifier, "d", "Finder", partial(hs.execute, "open ~"))
+hs.hotkey.bind(modifier, "f", "Finder", partial(hs.application.launchOrFocus, "Finder"))
 
 -- Defeat paste-blocking
 hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
@@ -98,10 +98,11 @@ hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap
 -- Bind hotkeys to common window manipulation functions
 -- Requires SmudgedGlass Spoon
 if hs.spoons.isInstalled("SmudgedGlass") then
+	hs.application.enableSpotlightForNameSearches(true)
 	hs.loadSpoon("SmudgedGlass")
 	spoon.SmudgedGlass:bindHotKeys({
 		toggleGrid = { modifier, "`", message = "Toggle window grid" },
-		windowMaximise = { modifier, "f", message = "Maximise window" },
+		windowMaximise = { modifier, "m", message = "Maximise window" },
 		windowMaximiseCentre = { modifier, "u" },
 		windowLeft = { modifier, "y" },
 		windowLeftTop = { modifier, "7" },
