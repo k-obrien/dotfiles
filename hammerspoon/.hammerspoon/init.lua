@@ -39,15 +39,15 @@ end
 
 hs.screen.watcher.new(applyWindowLayout)
 
-function setPreferredAudioOutputDevice()
-	local currentUser = hs.caffeinate.sessionProperties()["kCGSSessionUserNameKey"]
-	local preferredDevice = currentUser == "kieran.obrien" and "MacBook Pro Speakers" or "LG ULTRAWIDE"
-	local output = hs.audiodevice.findOutputByName(preferredDevice)
- 
-	if output == nil then
-		hs.alert.show("Could not find output: " .. preferredDevice)
-	elseif not output:setDefaultOutputDevice() then
-		hs.alert.show("Failed to set default output: " .. output)
+function muteAudioOutputDevice()
+	local preferredDevice = "MacBook Pro Speakers"
+	local device = hs.audiodevice.findDeviceByName(preferredDevice)
+	
+	if device == nil then
+		hs.alert.show("Could not find device: " .. preferredDevice)
+	else
+		local currentUser = hs.caffeinate.sessionProperties()["kCGSSessionUserNameKey"]
+		device:setOutputMuted(currentUser:find(".", 1, true) == nil)
 	end
 end
 
@@ -56,7 +56,7 @@ end
 if hs.spoons.isInstalled("StateActor") then
 	hs.loadSpoon("StateActor")
 	spoon.StateActor:bindActions({
-		sessionDidBecomeActive = { partial(setPreferredAudioOutputDevice) }
+		sessionDidBecomeActive = { partial(muteAudioOutputDevice) }
 	})
 	spoon.StateActor:start()
 end
