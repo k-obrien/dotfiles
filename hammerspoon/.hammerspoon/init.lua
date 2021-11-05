@@ -56,7 +56,8 @@ end
 if hs.spoons.isInstalled("StateActor") then
 	hs.loadSpoon("StateActor")
 	spoon.StateActor:bindActions({
-		sessionDidBecomeActive = { partial(muteAudioOutputDevice) }
+		sessionDidBecomeActive = { partial(muteAudioOutputDevice) },
+		screensDidUnlock = { partial(applyWindowLayout) }
 	})
 	spoon.StateActor:start()
 end
