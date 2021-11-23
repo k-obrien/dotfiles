@@ -5,14 +5,16 @@ error_exit() {
     exit 1
 }
 
-[[ -n "$1" ]] && [[ "$1" != "-d" ]] && error_exit "Usage: rmgitlocal [-d]\n\t-d\tDelete merged branches"
+[[ -z "$1" ]] || [[ "$1" == "-d" ]] || [[ "$1" == "-D" ]] || error_exit "Usage: rmgitlocal [options]\n\t-[dD]\tDelete merged branches"
 
 git remote prune origin
 
-cmd=(echo "$(git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}')")
+branches=($(git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'))
 
-if [[ "$1" == "-d" ]]; then
-    "${cmd[@]}" | xargs git branch -d
-else
-    "${cmd[@]}"
-fi
+for branch in "${branches[@]}"; do
+    if [[ -z "$1" ]]; then
+        echo "${branch}"
+    else
+        git branch "${1}" "${branch}"
+    fi
+done
