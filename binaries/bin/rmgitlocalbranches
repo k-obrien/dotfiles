@@ -2,19 +2,37 @@
 
 source common
 
-depend_on git
+_depend_on git
 
+usage="Usage: ${0##*/} -[dD]
+    -d\tDelete fully merged branches
+    -D\tDelete all merged branches"
 
-[[ -z "$1" ]] || [[ "$1" == "-d" ]] || [[ "$1" == "-D" ]] || error_exit "Usage: rmgitlocal [options]\n\t-[dD]\tDelete merged branches"
+_prune_remote() {
+    echo "Pruning remote branches..."
+    git remote prune origin
+}
 
-git remote prune origin
+_prune_local() {
+    git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'
+}
 
-branches=($(git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'))
+case "$1" in
+    "")
+        _prune_remote
+        branches=($(_prune_local))
+        printf "%s\n" "${branches[@]}"
+        ;;
 
-for branch in "${branches[@]}"; do
-    if [[ -z "$1" ]]; then
-        echo "$branch"
-    else
-        git branch "$1" "$branch"
-    fi
-done
+    -d | -D)
+        _prune_remote
+        branches=($(_prune_local))
+        for branch in "${branches[@]}"; do
+            git branch "$1" "$branch"
+        done
+        ;;
+    
+    *)
+        _error_exit $usage
+        ;;
+esac

@@ -2,12 +2,12 @@
 
 source common
 
-depend_on ffmpeg
+_depend_on ffmpeg
 
-[[ "$#" -lt 2 ]] && error_exit "Usage: webm2gif infile outfile width"
+[[ "$#" -lt 2 ]] && _error_exit "Usage: ${0##*/} infile outfile width"
 
 width=${3:-350} # default to 350px
 
-[[ "$width" =~ ^[0-9]+$ ]] || error_exit "width expects an int"
+[[ "$width" =~ ^[0-9]+$ ]] || _error_exit "width expects an int"
 
-ffmpeg -i "$1" -filter_complex "[0:v] fps=12,crop=iw:ih-100:0:100,scale=w="$width":h=-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" "$2"
+ffmpeg -i "$1" -filter_complex "[0:v] fps=12,crop=iw:ih-100:0:100,scale=w=${width}:h=-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" "$2"

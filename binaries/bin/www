@@ -2,19 +2,16 @@
 
 source common
 
-depend_on python
+_depend_on python
 
-# Set web root to current directory by default
-WWW_ROOT="."
-
-# Set web root to any supplied directory
-[[ -n "$1" ]] && WWW_ROOT="$1"
+# Set web root to current directory if none supplied
+WWW_ROOT=${1:-.}
 
 # Exit if the given directory doesn't exist
-cd "$WWW_ROOT" &> /dev/null || error_exit "No such directory."
+cd "$WWW_ROOT" &> /dev/null || _error_exit "No such directory."
 
 # Check the files in the web root directory for HTML content
-grep -Eiqs "<x?html?>" -- * || error_exit "No HTML files found."
+grep -Eiqs "<x?html?>" -- * || _error_exit "No HTML files found."
 
 # Start the server and open a browser
 /usr/bin/env python -m SimpleHTTPServer 8000 &

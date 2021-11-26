@@ -2,12 +2,8 @@
 
 source common
 
-depend_on shasum
+_depend_on shasum
 
-[[ "$#" -ne 3 ]] || [[ ! -f "$3" ]] && error_exit "Usage: shachk ALGORITHM CHECKSUM FILENAME"
+[[ "$#" -ne 3 ]] || [[ ! -f "$3" ]] && _error_exit "Usage: ${0##*/} algorithm checksum filename"
 
-directory=$(dirname "$3")
-cd "$directory" || error_exit "Directory not found: $directory"
-
-filename=$(basename "$3")
-shasum -a "$1" -c <(echo "${2}  ${filename}")
+shasum -a "$1" -c <(echo "${2}  ${3}")
