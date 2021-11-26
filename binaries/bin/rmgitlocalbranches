@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-error_exit() {
-    echo "$1" >&2
-    exit 1
-}
+source common
+
+depend_on git
+
 
 [[ -z "$1" ]] || [[ "$1" == "-d" ]] || [[ "$1" == "-D" ]] || error_exit "Usage: rmgitlocal [options]\n\t-[dD]\tDelete merged branches"
 
@@ -13,8 +13,8 @@ branches=($(git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'))
 
 for branch in "${branches[@]}"; do
     if [[ -z "$1" ]]; then
-        echo "${branch}"
+        echo "$branch"
     else
-        git branch "${1}" "${branch}"
+        git branch "$1" "$branch"
     fi
 done

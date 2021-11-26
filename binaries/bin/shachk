@@ -1,13 +1,10 @@
 #!/usr/bin/env zsh
 
-error_exit() {
-    echo "$1" >&2
-    exit 1
-}
+source common
+
+depend_on shasum
 
 [[ "$#" -ne 3 ]] || [[ ! -f "$3" ]] && error_exit "Usage: shachk ALGORITHM CHECKSUM FILENAME"
-
-type shasum &>/dev/null || error_exit "Could not find shasum"
 
 directory=$(dirname "$3")
 cd "$directory" || error_exit "Directory not found: $directory"

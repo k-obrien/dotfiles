@@ -1,15 +1,11 @@
 #!/usr/bin/env zsh
 
-error_exit() {
-    echo "$1" >&2
-    exit 1
-}
+source common
+
+depend_on python
 
 # Set web root to current directory by default
 WWW_ROOT="."
-
-# Check for a valid python installation
-type python &> /dev/null || error_exit "Valid python installation not found."
 
 # Set web root to any supplied directory
 [[ -n "$1" ]] && WWW_ROOT="$1"
