@@ -123,10 +123,11 @@ bindkey "^[[A" up-line-or-search    # Up arrow
 bindkey "^[[B" down-line-or-search  # Down arrow
 
 # Aliases
-alias vdiff="studio diff"           # Use Android Studio's visual diff tool
-alias r="fc -e -"                   # Enable search and replace for previous command
-alias man="xmanpage"                # Open man pages in separate terminal window
-alias help="${ZDOTDIR}/help.md"     # Display curated help
+alias vdiff="studio diff"                   # Use Android Studio's visual diff tool
+alias r="fc -e -"                           # Enable search and replace for previous command
+alias man="xmanpage"                        # Open man pages in separate terminal window
+alias help="${ZDOTDIR}/help.md"             # Display curated help
+alias gpgreset="gpgconf --kill gpg-agent"   # Reload the GPG Agent
 
 # Global Aliases
 alias -g ll="ls -alhF"
