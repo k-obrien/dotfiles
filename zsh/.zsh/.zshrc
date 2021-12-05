@@ -128,6 +128,7 @@ alias r="fc -e -"                           # Enable search and replace for prev
 alias man="xmanpage"                        # Open man pages in separate terminal window
 alias help="${ZDOTDIR}/help.md"             # Display curated help
 alias gpgreset="gpgconf --kill gpg-agent"   # Reload the GPG Agent
+alias say="say -v Kate "                    # Speak a phrase
 
 # Global Aliases
 alias -g ll="ls -alhF"
