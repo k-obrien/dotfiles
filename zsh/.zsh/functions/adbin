@@ -1,4 +1,4 @@
-# Dispatch input to the Android Debug Bridge.
+# Dispatch input to Android device
 
 function adbin() {
     emulate -L zsh

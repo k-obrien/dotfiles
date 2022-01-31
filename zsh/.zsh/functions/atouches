@@ -1,0 +1,7 @@
+# Toggle touch visibility on Android device
+
+function atouches() {
+    emulate -L zsh
+    local arg=$([[ $(adb shell settings get system show_touches) == "1" ]] && echo "0" || echo "1")
+    adbsetput system show_touches "$arg"
+}

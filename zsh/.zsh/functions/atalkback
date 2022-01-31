@@ -1,0 +1,10 @@
+# Toggle TalkBack service on Android device
+
+function atalkback() {
+    emulate -L zsh
+    local service="com.google.android.marvin.talkback.TalkBackService"
+    local disable="com.android.talkback"
+    local enable="com.google.android.marvin.talkback"
+    local arg=$([[ $(adb shell settings get secure enabled_accessibility_services) == "$enable/$service" ]] && echo "$disable" || echo "$enable")
+    adbsetput secure enabled_accessibility_services "$arg/$service"
+}

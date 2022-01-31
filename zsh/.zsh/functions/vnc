@@ -1,4 +1,4 @@
-# Establish a VNC session via Screen Sharing.
+# Establish a VNC session via Screen Sharing
 
 function vnc() {
     emulate -L zsh

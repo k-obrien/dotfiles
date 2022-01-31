@@ -1,4 +1,4 @@
-# Dispatch key event input to the Android Debug Bridge.
+# Dispatch key event input to Android device
 
 function adbkey() {
     emulate -L zsh

@@ -1,0 +1,15 @@
+# Set font scale on Android device
+
+function afontscl() {
+    emulate -L zsh
+
+    local scale
+    case "$1" in
+        small) scale="0.85";;
+        default) scale="1.0";;
+        large) scale="1.15";;
+        largest) scale="1.30";;
+        *) scale="$1";;
+    esac
+    adbsetput system font_scale "$scale"
+}

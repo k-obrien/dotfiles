@@ -1,4 +1,4 @@
-# Print entire history or, optionally, search it for given term.
+# Print entire history or, optionally, search it for given term
 
 function hist() {
     emulate -L zsh

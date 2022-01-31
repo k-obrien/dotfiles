@@ -1,4 +1,4 @@
-# Dispatch text input to the Android Debug Bridge.
+# Dispatch text input to Android device
 
 function adbtype() {
     emulate -L zsh

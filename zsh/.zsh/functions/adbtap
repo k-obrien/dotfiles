@@ -1,4 +1,4 @@
-# Dispatch touch input to the Android Debug Bridge.
+# Dispatch touch input to Android device
 
 function adbtap() {
     emulate -L zsh

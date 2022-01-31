@@ -1,4 +1,4 @@
-# Enable interactive history search.
+# Enable interactive history search
 
 function shist() {
     emulate -L zsh
