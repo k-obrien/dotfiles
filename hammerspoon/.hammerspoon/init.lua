@@ -17,6 +17,17 @@ if hs.spoons.isInstalled("ReloadConfiguration") then
 	spoon.ReloadConfiguration:start()
 end
 
+-- Dismiss network interruptions warning
+hs.window.filter.new(true):subscribe(
+	hs.window.filter.windowCreated,
+	function(window, appName, event)
+    	if appName == "loginwindow" and window:id() == 1692 then
+			hs.osascript.applescriptFromFile("IgnoreNetworkInterruption.applescript")
+    	end
+	end,
+	true
+)
+
 function applyWindowLayout()
     local externalScreen = "LG ULTRAWIDE"
     local internalScreen = "Built-in Retina Display"
