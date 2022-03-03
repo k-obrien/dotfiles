@@ -17,14 +17,18 @@ if hs.spoons.isInstalled("ReloadConfiguration") then
 	spoon.ReloadConfiguration:start()
 end
 
--- Dismiss network interruptions warning
+-- Dismiss network interruption warning
+function dismissNetworkInterruptionWarning()
+	local window = hs.window.get(1692)
+
+	if window and window:application():name() == "loginwindow" and window:id() == 1692 then
+		hs.osascript.applescriptFromFile("IgnoreNetworkInterruption.applescript")
+	end
+end
+
 hs.window.filter.new(true):subscribe(
 	hs.window.filter.windowCreated,
-	function(window, appName, event)
-    	if appName == "loginwindow" and window:id() == 1692 then
-			hs.osascript.applescriptFromFile("IgnoreNetworkInterruption.applescript")
-    	end
-	end,
+	function(window, appName, event) dismissNetworkInterruptionWarning() end,
 	true
 )
 
@@ -66,9 +70,12 @@ end
 -- Requires StateActor Spoon
 if hs.spoons.isInstalled("StateActor") then
 	hs.loadSpoon("StateActor")
+	local actionsForStates = { muteAudioOutputDevice, applyWindowLayout, dismissNetworkInterruptionWarning }
 	spoon.StateActor:bindActions({
-		sessionDidBecomeActive = { partial(muteAudioOutputDevice) },
-		screensDidUnlock = { partial(applyWindowLayout) }
+		sessionDidBecomeActive = actionsForStates,
+		screensDidUnlock = actionsForStates,
+		screensDidWake = actionsForStates,
+		systemDidWake = actionsForStates
 	})
 	spoon.StateActor:start()
 end
