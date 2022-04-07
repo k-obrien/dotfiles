@@ -22,7 +22,7 @@ function dismissNetworkInterruptionWarning()
 	local window = hs.window.get(1692)
 
 	if window and window:application():name() == "loginwindow" and window:id() == 1692 then
-		hs.osascript.applescriptFromFile("IgnoreNetworkInterruption.applescript")
+		hs.osascript.applescriptFromFile("~/.scripts/ignore-network-interruption.applescript")
 	end
 end
 
@@ -98,9 +98,6 @@ end
 
 hs.hotkey.alertDuration = 0
 hs.hotkey.bind(modifier, "a", showHelp, hs.alert.closeAll)
-
--- Switch user
-hs.hotkey.bind(modifier, "s", "Switch user", partial(hs.osascript.applescriptFromFile, "FastUserSwitching.applescript"))
 
 -- Apply a predefined window layout
 hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)

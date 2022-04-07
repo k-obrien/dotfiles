@@ -1,3 +1,18 @@
+#!/usr/bin/osascript
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title Fast User Switch
+# @raycast.mode silent
+
+# Optional parameters:
+# @raycast.icon 👤
+
+# Documentation:
+# @raycast.description Switch to the other user when only two exist
+# @raycast.author Kieran O'Brien
+# @raycast.authorURL https://github.com/k-obrien/
+
 tell application "System Events"
 	set currentUser to full name of current user
 	
