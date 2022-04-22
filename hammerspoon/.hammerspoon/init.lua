@@ -21,7 +21,7 @@ end
 function dismissNetworkInterruptionWarning()
 	local window = hs.window.get(1692)
 
-	if window and window:application():name() == "loginwindow" and window:id() == 1692 then
+	if window and window:application():name() == "loginwindow" then
 		hs.osascript.applescriptFromFile("~/.scripts/ignore-network-interruption.applescript")
 	end
 end
