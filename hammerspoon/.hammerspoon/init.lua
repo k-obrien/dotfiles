@@ -36,10 +36,12 @@ function applyWindowLayout()
     local externalScreen = "LG ULTRAWIDE"
     local internalScreen = "Built-in Retina Display"
     local numberOfScreens = #hs.screen.allScreens()
+
+	local firefoxPos = hs.application.get("Android Studio") and { x = 0, y = 0, w = 0.35, h = 1 } or { x = 0.25, y = 0, w = 0.5, h = 1 }
     
     local dualScreenLayout = {
-        { "Firefox", nil, externalScreen, { 0, 0, 0.35, 1 }, nil, nil },
-        { "Android Studio", nil, externalScreen, { 0.35, 0, 0.65, 1 }, nil, nil },
+        { "Firefox", nil, externalScreen, firefoxPos, nil, nil },
+        { "Android Studio", nil, externalScreen, { x = 0.35, y = 0, w = 0.65, h = 1 }, nil, nil },
         { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil }
     }
     
