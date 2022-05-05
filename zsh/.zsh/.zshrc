@@ -126,7 +126,12 @@ bindkey "^q" push-line-or-edit      # Ctrl+Q
 bindkey "^[[A" up-line-or-search    # Up arrow
 bindkey "^[[B" down-line-or-search  # Down arrow
 
-# Aliases
+# Local Aliases
+if [ -f "${HOME}/.aliases" ]; then
+    source "${HOME}/.aliases"
+fi
+
+# Common Aliases
 alias vdiff="studio diff"                   # Use Android Studio's visual diff tool
 alias r="fc -e -"                           # Enable search and replace for previous command
 alias man="xmanpage"                        # Open man pages in separate terminal window
@@ -134,7 +139,7 @@ alias help="${ZDOTDIR}/help.md"             # Display curated help
 alias gpgreset="gpgconf --kill gpg-agent"   # Reload the GPG Agent
 alias say="say -v Kate "                    # Speak a phrase
 
-# Global Aliases
+# Common Global Aliases
 alias -g ll="ls -alhF"
 alias -g l="ls -lhF"
 alias -g G="| grep"                 # Pipe output to grep
@@ -142,7 +147,7 @@ alias -g L="| less"                 # Pipe output to less
 alias -g W="| wc -l"                # Count lines in output
 alias -g C="| tr -d '\n' | pbcopy"  # Pipe output to the pasteboard
 
-# Suffix Aliases
+# Common Suffix Aliases
 alias -s log="open -a Console"  # Open log files in Console
 alias -s md="mdcat"             # Pipe markdown files to mdcat
 
