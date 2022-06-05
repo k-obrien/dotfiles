@@ -1,20 +1,17 @@
 prompt_kilo_setup() {
-    lime=10
-    cornflower_blue=69
-
     # %B (%b)                   :  Start (stop) boldface mode
     # %F{...} (%f)              :  Start (stop) using a foreground color other than the default; see https://jonasjacek.github.io/colors/
     # %(x.true-text.false-text) :  Ternary expression; print true-text if ‘x’ is true and false-text otherwise
 
     # %~    :  Current directory; ‘~’ denotes home
-    prompt_pwd='%B%F{$cornflower_blue}%~%f%b'
+    prompt_pwd='%B%F{blue}%~%f%b'
 
     prompt_git_info=""
 
     # !     :  Ternary test character; true if the shell is running with privileges
     # %n@%m :  Print ‘username@hostname’
     # %#    :  Print ‘#’ if privileged user and ‘%’ otherwise
-    prompt_user_and_host='%F{%(!.red.$lime)}%n@%m %#%f '
+    prompt_user_and_host='%F{%(!.red.green)}%n@%m %#%f '
 
     # ?     :  Ternary test character; true if the exit status of the last command exceeds zero
     # %?    :  Print the exit code of previous command
@@ -28,7 +25,7 @@ prompt_kilo_setup() {
         export ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="-"       # Branch is behind remote
         export ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="±"     # Branch and remote have diverged
         export ZSH_THEME_GIT_PROMPT_DIRTY="%F{red}"         # Colour branch name red if changes exist
-        export ZSH_THEME_GIT_PROMPT_CLEAN="%F{$lime}"       # Colour branch name green if no changes exist
+        export ZSH_THEME_GIT_PROMPT_CLEAN="%F{green}"       # Colour branch name green if no changes exist
         export ZSH_THEME_GIT_PROMPT_UNTRACKED="⋀"           # The working tree contains untracked files
         export ZSH_THEME_GIT_PROMPT_STASHED="⋁"             # The working tree contains stashed changes
         export ZSH_THEME_GIT_PROMPT_UNTRACKED_STASHED="⩙"   # The working tree contains untracked files and stashed changes
