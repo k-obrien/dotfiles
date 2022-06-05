@@ -22,9 +22,7 @@ tell application "System Events"
 		end tell
 		
 		tell its window "Control Centre"
-			tell its group 1
-				click first button of (buttons whose name is not currentUser)
-			end tell
+			click first button of (buttons whose name is not currentUser)
 		end tell
 	end tell
 end tell
