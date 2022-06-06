@@ -11,23 +11,23 @@ hs.alert.defaultStyle["textSize"] = 24
 -- Enable auto-reload on configuration change
 -- Requires ReloadConfiguration Spoon
 if hs.spoons.isInstalled("ReloadConfiguration") then
-	hs.loadSpoon("ReloadConfiguration")
-	spoon.ReloadConfiguration:start()
+    hs.loadSpoon("ReloadConfiguration")
+    spoon.ReloadConfiguration:start()
 end
 
 -- Dismiss network interruption warning
 function dismissNetworkInterruptionWarning()
-	local window = hs.window.get(1692)
+    local window = hs.window.get(1692)
 
-	if window and window:application():name() == "loginwindow" then
-		hs.osascript.applescriptFromFile("~/.scripts/ignore-network-interruption.applescript")
-	end
+    if window and window:application():name() == "loginwindow" then
+        hs.osascript.applescriptFromFile("~/.scripts/ignore-network-interruption.applescript")
+    end
 end
 
 hs.window.filter.new(true):subscribe(
-	hs.window.filter.windowCreated,
-	function(window, appName, event) dismissNetworkInterruptionWarning() end,
-	true
+    hs.window.filter.windowCreated,
+    function(window, appName, event) dismissNetworkInterruptionWarning() end,
+    true
 )
 
 function applyWindowLayout()
@@ -35,7 +35,7 @@ function applyWindowLayout()
     local internalScreen = "Built-in Retina Display"
     local numberOfScreens = #hs.screen.allScreens()
 
-	local firefoxPos = hs.application.get("Android Studio") and { x = 0, y = 0, w = 0.35, h = 1 } or { x = 0.25, y = 0, w = 0.5, h = 1 }
+    local firefoxPos = hs.application.get("Android Studio") and { x = 0, y = 0, w = 0.35, h = 1 } or { x = 0.25, y = 0, w = 0.5, h = 1 }
     
     local dualScreenLayout = {
         { "Firefox", nil, externalScreen, firefoxPos, nil, nil },
@@ -57,15 +57,15 @@ hs.screen.watcher.new(applyWindowLayout)
 -- Call functions on system state changes
 -- Requires StateActor Spoon
 if hs.spoons.isInstalled("StateActor") then
-	hs.loadSpoon("StateActor")
-	local actionsForStates = { applyWindowLayout, dismissNetworkInterruptionWarning }
-	spoon.StateActor:bindActions({
-		sessionDidBecomeActive = actionsForStates,
-		screensDidUnlock = actionsForStates,
-		screensDidWake = actionsForStates,
-		systemDidWake = actionsForStates
-	})
-	spoon.StateActor:start()
+    hs.loadSpoon("StateActor")
+    local actionsForStates = { applyWindowLayout, dismissNetworkInterruptionWarning }
+    spoon.StateActor:bindActions({
+        sessionDidBecomeActive = actionsForStates,
+        screensDidUnlock = actionsForStates,
+        screensDidWake = actionsForStates,
+        systemDidWake = actionsForStates
+    })
+    spoon.StateActor:start()
 end
 
 -- >>> Sit/Stand menu item and notification
