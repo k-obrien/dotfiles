@@ -56,23 +56,11 @@ end
 
 hs.screen.watcher.new(applyWindowLayout)
 
-function muteAudioOutputDevice()
-	local preferredDevice = "MacBook Pro Speakers"
-	local device = hs.audiodevice.findDeviceByName(preferredDevice)
-	
-	if device == nil then
-		hs.alert.show("Could not find device: " .. preferredDevice)
-	else
-		local currentUser = hs.caffeinate.sessionProperties()["kCGSSessionUserNameKey"]
-		device:setOutputMuted(currentUser:find(".", 1, true) == nil)
-	end
-end
-
 -- Call functions on system state changes
 -- Requires StateActor Spoon
 if hs.spoons.isInstalled("StateActor") then
 	hs.loadSpoon("StateActor")
-	local actionsForStates = { muteAudioOutputDevice, applyWindowLayout, dismissNetworkInterruptionWarning }
+	local actionsForStates = { applyWindowLayout, dismissNetworkInterruptionWarning }
 	spoon.StateActor:bindActions({
 		sessionDidBecomeActive = actionsForStates,
 		screensDidUnlock = actionsForStates,
