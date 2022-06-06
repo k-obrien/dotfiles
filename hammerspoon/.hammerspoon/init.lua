@@ -1,5 +1,3 @@
-local partial = hs.fnutils.partial
-
 -- Set the console color scheme
 hs.console.darkMode(true)
 hs.console.consolePrintColor({ green = 1 })
