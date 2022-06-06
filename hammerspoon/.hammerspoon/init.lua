@@ -24,7 +24,7 @@ function dismissNetworkInterruptionWarning()
     end
 end
 
-hs.window.filter.new(true):subscribe(
+windowFilter = hs.window.filter.new(true):subscribe(
     hs.window.filter.windowCreated,
     function(window, appName, event) dismissNetworkInterruptionWarning() end,
     true
@@ -52,7 +52,7 @@ function applyWindowLayout()
     hs.layout.apply(numberOfScreens == 1 and singleScreenLayout or dualScreenLayout)
 end
 
-hs.screen.watcher.new(applyWindowLayout)
+screenWatcher = hs.screen.watcher.new(applyWindowLayout)
 
 -- Call functions on system state changes
 -- Requires StateActor Spoon
@@ -107,7 +107,7 @@ end
 -- <<<
 
 -- Global modifier key; assigned to Caps Lock in Karabiner
-local modifier = { "ctrl", "cmd", "alt", "shift" }
+modifier = { "ctrl", "cmd", "alt", "shift" }
 
 -- Show hotkey assignments
 local function showHelp()
