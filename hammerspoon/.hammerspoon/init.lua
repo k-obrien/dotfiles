@@ -70,6 +70,44 @@ if hs.spoons.isInstalled("StateActor") then
 	spoon.StateActor:start()
 end
 
+-- >>> Sit/Stand menu item and notification
+postureMenuBarItem = hs.menubar.new()
+sitting = true
+
+function setPosture(sitting)
+    postureMenuBarItem:setTitle(sitting and "SITTING" or "STANDING")
+end
+
+function cancelNotifications()
+    hs.notify.withdrawAll()
+    hs.notify.withdrawAllScheduled()
+end
+
+function postureClicked()
+    if (sitting) then
+        sitting = false
+    else
+        sitting = true
+    end
+    
+    setPosture(sitting)
+    cancelNotifications()
+    hs.notify.new(
+        cancelNotifications,
+        { 
+            title = "Change Posture", 
+            informativeText = sitting and "Stand up" or "Sit down", 
+            withdrawAfter = 0
+        }
+    ):schedule(os.time() + hs.timer.hours(1))
+end
+
+if postureMenuBarItem then
+    postureMenuBarItem:setClickCallback(postureClicked)
+    setPosture(sitting)
+end
+-- <<<
+
 -- Global modifier key; assigned to Caps Lock in Karabiner
 local modifier = { "ctrl", "cmd", "alt", "shift" }
 
