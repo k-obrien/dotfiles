@@ -16,19 +16,15 @@ if hs.spoons.isInstalled("ReloadConfiguration") then
 end
 
 -- Dismiss network interruption warning
-function dismissNetworkInterruptionWarning()
-    local window = hs.window.get(1692)
-
-    if window and window:application():name() == "loginwindow" then
-        hs.osascript.applescriptFromFile("~/.scripts/ignore-network-interruption.applescript")
+function applicationWatcher(appName, eventType, appObject)
+    if (eventType == hs.application.watcher.activated) then
+        if (appName == "loginwindow") and hs.window.get(1692) then
+            hs.osascript.applescriptFromFile("~/.scripts/ignore-network-interruption.applescript")
+        end
     end
 end
 
-windowFilter = hs.window.filter.new(true):subscribe(
-    hs.window.filter.windowCreated,
-    function(window, appName, event) dismissNetworkInterruptionWarning() end,
-    true
-)
+appWatcher = hs.application.watcher.new(applicationWatcher):start()
 
 function applyWindowLayout()
     local externalScreen = "LG ULTRAWIDE"
@@ -58,7 +54,7 @@ screenWatcher = hs.screen.watcher.new(applyWindowLayout)
 -- Requires StateActor Spoon
 if hs.spoons.isInstalled("StateActor") then
     hs.loadSpoon("StateActor")
-    local actionsForStates = { applyWindowLayout, dismissNetworkInterruptionWarning }
+    local actionsForStates = { applyWindowLayout }
     spoon.StateActor:bindActions({
         sessionDidBecomeActive = actionsForStates,
         screensDidUnlock = actionsForStates,
