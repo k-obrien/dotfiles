@@ -19,7 +19,7 @@ end
 function applicationWatcher(appName, eventType, appObject)
     if (eventType == hs.application.watcher.activated) then
         if (appName == "loginwindow") and hs.window.get(1692) then
-            hs.osascript.applescriptFromFile("~/.scripts/ignore-network-interruption.applescript")
+            hs.osascript.applescriptFromFile("~/.local/bin/ignore-network-interruption.applescript")
         end
     end
 end

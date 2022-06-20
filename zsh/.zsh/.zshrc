@@ -9,8 +9,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export GPG_TTY=$(tty)
 
 # Append folders to path
-path+=("${HOME}/bin")
-path+=("${HOME}/.iterm2")
+path+=("${HOME}/.local/bin")
 path+=("${HOME}/Library/Android/sdk/platform-tools")
 path+=("${HOME}/Library/Android/sdk/tools/bin")
 path+=("${HOME}/Library/Android/sdk/emulator")
