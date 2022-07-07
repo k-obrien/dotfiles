@@ -1,4 +1,5 @@
 if status is-interactive
+    set -gx LS_COLORS "$(vivid generate jellybeans)"
     set -g fish_greeting
 
     set -U tide_prompt_add_newline_before true
@@ -18,4 +19,7 @@ if status is-interactive
     set -U tide_character_icon \u276f
     
     set -U tide_jobs_icon \u2699
+
+    set -gx fzf_fd_opts --ignore-file .fzffdignore
+    set -gx fzf_preview_dir_cmd exa --all --color=always --oneline
 end
