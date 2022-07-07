@@ -1,4 +1,5 @@
 if status is-interactive
+    fish_config theme choose "Tomorrow Night"
     set -gx LS_COLORS "$(vivid generate jellybeans)"
     set -g fish_greeting
 
