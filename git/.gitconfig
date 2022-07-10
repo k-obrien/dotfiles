@@ -1,29 +1,44 @@
 [include]
     path = ~/.gitconfig.local
+
 [user]
     name = Kieran O'Brien
+
 [core]
     autocrlf = input
     excludesfile = ~/.gitignore_global
     editor = code --wait
+    pager = delta
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+
+[init]
+    defaultBranch = main
+
 [commit]
     gpgsign = true
+[gpg]
+    program = /usr/local/bin/gpg
+
 [diff]
+    colorMoved = default
     tool = studio
 [difftool]
     prompt = false
 [difftool "studio"]
     cmd = studio diff "$LOCAL" "$REMOTE"
+[delta]
+    navigate = true
+    side-by-side = true
+    hyperlinks = true
+    map-styles = bold purple => syntax magenta, bold cyan => syntax blue
+
 [merge]
+    conflictstyle = diff3
     tool = studio
 [mergetool]
     prompt = false
 [mergetool "studio"]
     cmd = studio merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     trustExitCode = true
-[url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
-[init]
-    defaultBranch = main
-[gpg]
-    program = /usr/local/bin/gpg
