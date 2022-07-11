@@ -121,6 +121,14 @@ end
 hs.hotkey.alertDuration = 0
 hs.hotkey.bind(modifier, "a", showHelp, hs.alert.closeAll)
 
+function switchUser()
+    local path = table.concat({ "/Users/", hs.caffeinate.sessionProperties()["kCGSSessionUserNameKey"], "/.local/bin/fast-user-switch.applescript" })
+    hs.osascript.applescriptFromFile(path)
+end
+
+-- Switch user
+hs.hotkey.bind(modifier, "s", "Switch user", switchUser)
+
 -- Apply a predefined window layout
 hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
 
