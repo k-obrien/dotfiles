@@ -7,14 +7,19 @@ export LESS="--IGNORE-CASE --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --H
 export GREP_OPTIONS="--color=auto"
 export HOMEBREW_NO_ANALYTICS=1
 export GPG_TTY=$(tty)
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
 # Append folders to path
 path+=("${HOME}/.local/bin")
 path+=("${HOME}/Library/Android/sdk/platform-tools")
 path+=("${HOME}/Library/Android/sdk/tools/bin")
 path+=("${HOME}/Library/Android/sdk/emulator")
-path+=("/usr/local/sbin")
-path+=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin")
+path+=("/Applications/VSCodium.app/Contents/Resources/app/bin")
 
 # Append folders to search path
 fpath+=("${ZDOTDIR}/functions")
@@ -131,6 +136,7 @@ if [ -f "${HOME}/.aliases" ]; then
 fi
 
 # Common Aliases
+alias brew='sudo -Hu kieran brew'
 alias vdiff="studio diff"                   # Use Android Studio's visual diff tool
 alias r="fc -e -"                           # Enable search and replace for previous command
 alias man="xmanpage"                        # Open man pages in separate terminal window
