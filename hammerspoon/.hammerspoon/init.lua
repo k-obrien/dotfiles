@@ -27,7 +27,7 @@ end
 appWatcher = hs.application.watcher.new(applicationWatcher):start()
 
 function applyWindowLayout()
-    local externalScreen = "LG ULTRAWIDE"
+    local externalScreen = "LG HDR WQHD+"
     local internalScreen = "Built-in Retina Display"
     local numberOfScreens = #hs.screen.allScreens()
 
