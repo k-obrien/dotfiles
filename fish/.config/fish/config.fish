@@ -20,4 +20,10 @@ if status is-interactive
 
     set -gx fzf_fd_opts --ignore-file .fzffdignore
     set -gx fzf_preview_dir_cmd exa --all --color=always --oneline
+
+    alias cat bat
+    alias grep rg
+    alias ls 'exa --all --group-directories-first'
+    alias ll 'ls --long --binary --group --time-style=long-iso --git'
+    alias tree 'ls --tree'
 end
