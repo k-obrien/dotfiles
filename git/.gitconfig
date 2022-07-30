@@ -7,7 +7,7 @@
 [core]
     autocrlf = input
     excludesfile = ~/.gitignore_global
-    editor = code --wait
+    editor = codium --wait
     pager = delta
 
 [url "ssh://git@github.com/"]
@@ -19,7 +19,7 @@
 [commit]
     gpgsign = true
 [gpg]
-    program = /opt/homebrew/bin/gpg
+    program = gpg
 
 [diff]
     colorMoved = default
