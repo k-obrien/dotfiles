@@ -1,6 +1,0 @@
-# Dispatch input to Android device
-
-function adbin() {
-    emulate -L zsh
-    adb shell input "$*"
-}

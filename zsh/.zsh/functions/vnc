@@ -1,7 +1,0 @@
-# Establish a VNC session via Screen Sharing
-
-function vnc() {
-    emulate -L zsh
-    open vnc://"$@"
-}
-

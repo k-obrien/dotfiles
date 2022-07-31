@@ -1,6 +1,0 @@
-# Add entry to Settings database on Android device
-
-function adbsetput() {
-    emulate -L zsh
-    adb shell settings put "$*"
-}

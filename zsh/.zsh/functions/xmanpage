@@ -1,7 +1,0 @@
-# Open man pages in separate terminal window
-
-function xmanpage() {
-    emulate -L zsh
-    open -a terminal x-man-page://"$1"
-}
-
