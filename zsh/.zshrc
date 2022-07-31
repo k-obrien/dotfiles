@@ -1,1 +1,1 @@
-[[ -x /opt/homebrew/bin/fish ]] && /opt/homebrew/bin/fish
+[[ -x /opt/homebrew/bin/fish ]] && /opt/homebrew/bin/fish && exit
