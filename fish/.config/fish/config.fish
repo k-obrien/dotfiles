@@ -36,9 +36,26 @@ if status is-interactive
     set -gx fzf_fd_opts --ignore-file .fzffdignore
     set -gx fzf_preview_dir_cmd exa --all --color=always --oneline
 
-    alias cat bat
-    alias grep rg
-    alias ls 'exa --all --group-directories-first'
-    alias ll 'ls --long --binary --group --time-style=long-iso --git'
-    alias tree 'ls --tree'
+    type -q bat && alias cat bat
+    type -q dust && alias du dust
+    type -q gpgconf && alias gakill 'gpgconf --kill gpg-agent'
+    type -q procs && alias ps procs
+    type -q rg && alias grep 'rg --hidden -e'
+    type -q studio && alias vdiff 'studio diff'
+    type -q zsh && alias zshc 'zsh --no-rcs'
+
+    if type -q fd
+        alias fd 'fd --hidden'
+        alias find 'fd --hidden'
+    end
+
+    if type -q exa
+        alias ll 'exa --all --group-directories-first --long --binary --group --time-style=long-iso --git'
+        alias ls 'exa --all --group-directories-first'
+        alias tree 'exa --all --group-directories-first --tree'
+    end
+
+    if test -f ~/.config.fish.local
+        source ~/.config.fish.local
+    end
 end
