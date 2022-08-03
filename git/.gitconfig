@@ -16,8 +16,12 @@
 [init]
     defaultBranch = main
 
+[fetch]
+	prune = true
+
 [commit]
     gpgsign = true
+
 [gpg]
     program = gpg
 
