@@ -42,7 +42,6 @@ if status is-interactive
     type -q procs && alias ps procs
     type -q rg && alias grep 'rg --hidden -e'
     type -q studio && alias vdiff 'studio diff'
-    type -q zsh && alias zshc 'zsh --no-rcs'
 
     if type -q fd
         alias fd 'fd --hidden'
