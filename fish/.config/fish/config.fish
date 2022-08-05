@@ -4,9 +4,11 @@ if status is-interactive
     set -gx ANDROID_HOME ~/Library/Android/sdk
 
     set -gx HOMEBREW_PREFIX /opt/homebrew
-    set -gx HOMEBREW_CELLAR {$HOMEBREW_PREFIX}/Cellar
     set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX
+    set -gx HOMEBREW_CELLAR {$HOMEBREW_PREFIX}/Cellar
     set -gx HOMEBREW_NO_ANALYTICS 1
+
+    set -gx MANPATH {$HOMEBREW_PREFIX}/share/man (manpath)
 
     fish_add_path -g ~/.local/bin "$HOMEBREW_PREFIX"/{bin,sbin} "$ANDROID_HOME"/platform-tools
 
