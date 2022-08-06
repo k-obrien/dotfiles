@@ -6,5 +6,5 @@ _error_exit() {
 }
 
 _depend_on() {
-    type "$1" &>/dev/null || error_exit "missing dependency: ${1}"
+    type "$1" &>/dev/null || _error_exit "missing dependency: ${1}"
 }
