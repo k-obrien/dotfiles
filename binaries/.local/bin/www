@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
-source common
+source common || exit 1
 
-_depend_on python
+_depend_on python3
 
 # Set web root to current directory if none supplied
 WWW_ROOT=${1:-.}
@@ -14,5 +14,5 @@ cd "$WWW_ROOT" &> /dev/null || _error_exit "No such directory."
 grep -Eiqs "<x?html?>" -- * || _error_exit "No HTML files found."
 
 # Start the server and open a browser
-/usr/bin/env python -m SimpleHTTPServer 8000 &
+/usr/bin/env python3 -m SimpleHTTPServer 8000 &
 open http://localhost:8000

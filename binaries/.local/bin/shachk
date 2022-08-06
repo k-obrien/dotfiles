@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source common
+source common || exit 1
 
 _depend_on shasum
 
