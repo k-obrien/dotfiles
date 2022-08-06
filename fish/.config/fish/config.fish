@@ -44,6 +44,7 @@ if status is-interactive
     type -q procs && alias ps procs
     type -q rg && alias grep 'rg --hidden -e'
     type -q studio && alias vdiff 'studio diff'
+    type -q xman && alias man xman
 
     if type -q fd
         alias fd 'fd --hidden'
