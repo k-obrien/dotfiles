@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+source common || exit 1
+
+_depend_on git
+
+usage="Usage: ${0##*/} -[dD]
+    -d\tDelete fully merged branches
+    -D\tDelete all merged branches"
+
+echo "Pruning remote branches..."
+git fetch --prune
+branches=$(git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}')
+printf "%s\n" "${branches[@]}"
+
+case "$1" in
+    "") exit 0
+        ;;
+
+    -d | -D)
+        echo "Pruning merged local branches..."
+        for branch in "${branches[@]}"; do
+            git branch "$1" "$branch"
+        done
+        ;;
+    
+    *)
+        _error_exit $usage
+        ;;
+esac

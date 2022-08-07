@@ -1,16 +1,16 @@
 if status is-interactive
     set -gx GPG_TTY (tty)
 
-    set -gx ANDROID_HOME ~/Library/Android/sdk
-
     set -gx HOMEBREW_PREFIX /opt/homebrew
     set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX
     set -gx HOMEBREW_CELLAR {$HOMEBREW_PREFIX}/Cellar
     set -gx HOMEBREW_NO_ANALYTICS 1
 
-    set -gx MANPATH {$HOMEBREW_PREFIX}/share/man (manpath)
+    set -gx ANDROID_HOME ~/Library/Android/sdk
 
-    fish_add_path -g ~/.local/bin "$HOMEBREW_PREFIX"/{bin,sbin} "$ANDROID_HOME"/platform-tools
+    fish_add_path -g ~/.local/bin {$HOMEBREW_PREFIX}/{bin,sbin} {$ANDROID_HOME}/platform-tools
+
+    set -gx MANPATH (manpath)
 
     set -gx LESS --IGNORE-CASE --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --status-column --tabs=4 --window=-4
   
@@ -40,21 +40,26 @@ if status is-interactive
 
     type -q bat && alias cat bat
     type -q dust && alias du dust
-    type -q gpgconf && alias gakill 'gpgconf --kill gpg-agent'
+    type -q gpgconf && alias gakill "gpgconf --kill gpg-agent"
     type -q procs && alias ps procs
-    type -q rg && alias grep 'rg --hidden -e'
-    type -q studio && alias vdiff 'studio diff'
+    type -q rg && alias grep "rg --hidden -e"
+    type -q studio && alias vdiff "studio diff"
     type -q xman && alias man xman
 
     if type -q fd
-        alias fd 'fd --hidden'
-        alias find 'fd --hidden'
+        alias fd "fd --hidden"
+        alias find "fd --hidden"
     end
 
     if type -q exa
-        alias ll 'exa --all --group-directories-first --long --binary --group --time-style=long-iso --git'
-        alias ls 'exa --all --group-directories-first'
-        alias tree 'exa --all --group-directories-first --tree'
+        alias ll "exa --all --group-directories-first --long --binary --group --time-style=long-iso --git"
+        alias ls "exa --all --group-directories-first"
+        alias tree "exa --all --group-directories-first --tree"
+    end
+
+    if type -q git
+        alias git-log "git log --graph --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'"
+        alias git-branches "git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:human)%(color:reset))'"
     end
 
     if test -f ~/.config.fish.local
