@@ -13,7 +13,9 @@ if status is-interactive
     set -gx MANPATH (manpath)
 
     set -gx LESS --IGNORE-CASE --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --status-column --tabs=4 --window=-4
-  
+
+    type -q codium && set -gx VISUAL codium --wait
+
     type -q vivid && set -gx LS_COLORS (vivid generate jellybeans)
     
     fish_config theme choose "Tomorrow Night"
