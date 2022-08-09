@@ -41,6 +41,7 @@ if status is-interactive
     set -gx fzf_preview_dir_cmd exa --all --color=always --oneline
 
     type -q bat && alias cat bat
+    type -q codium && alias edit codium
     type -q dust && alias du dust
     type -q gpgconf && alias gakill "gpgconf --kill gpg-agent"
     type -q procs && alias ps procs
