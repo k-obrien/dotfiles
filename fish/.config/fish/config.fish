@@ -40,6 +40,8 @@ if status is-interactive
     set -gx fzf_fd_opts --ignore-file .fzffdignore
     set -gx fzf_preview_dir_cmd exa --all --color=always --oneline
 
+    alias raycast "osascript -e 'quit app \"Raycast\"' && open -a raycast"
+
     type -q bat && alias cat bat
     type -q codium && alias edit codium
     type -q dust && alias du dust
