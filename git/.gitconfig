@@ -27,11 +27,11 @@
 
 [diff]
     colorMoved = default
-    tool = studio
+    tool = vscodium
 [difftool]
     prompt = false
-[difftool "studio"]
-    cmd = studio diff "$LOCAL" "$REMOTE"
+[difftool "vscodium"]
+    cmd = codium --wait --diff "$LOCAL" "$REMOTE"
 [delta]
     navigate = true
     side-by-side = true
@@ -40,11 +40,11 @@
 
 [merge]
     conflictstyle = diff3
-    tool = studio
+    tool = vscodium
 [mergetool]
     prompt = false
-[mergetool "studio"]
-    cmd = studio merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+[mergetool "vscodium"]
+    cmd = codium --wait --merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     trustExitCode = true
 
 [alias]

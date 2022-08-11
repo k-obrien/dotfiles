@@ -43,14 +43,18 @@ if status is-interactive
     alias raycast "osascript -e 'quit app \"Raycast\"' && open -a raycast"
 
     type -q bat && alias cat bat
-    type -q codium && alias edit codium
     type -q dust && alias du dust
     type -q gpgconf && alias gakill "gpgconf --kill gpg-agent"
     type -q procs && alias ps procs
     type -q rg && alias grep "rg --hidden -e"
-    type -q studio && alias vdiff "studio diff"
     type -q xman && alias man xman
 
+    if type -q codium
+        alias edit codium
+        alias diff "codium --diff"
+        alias merge "codium --merge"
+    end
+    
     if type -q fd
         alias fd "fd --hidden"
         alias find "fd --hidden"
