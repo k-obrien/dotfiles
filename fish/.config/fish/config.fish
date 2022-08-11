@@ -11,6 +11,7 @@ if status is-interactive
     fish_add_path -g ~/.local/bin {$HOMEBREW_PREFIX}/{bin,sbin} {$ANDROID_HOME}/platform-tools
 
     set -gx MANPATH (manpath)
+    set -gx INFOPATH /opt/homebrew/share/info {$INFOPATH}
 
     set -gx LESS --IGNORE-CASE --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --status-column --tabs=4 --window=-4
 
