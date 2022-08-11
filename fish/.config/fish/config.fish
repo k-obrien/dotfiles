@@ -60,11 +60,6 @@ if status is-interactive
         alias tree "exa --all --group-directories-first --tree"
     end
 
-    if type -q git
-        alias git-log "git log --graph --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'"
-        alias git-branches "git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:human)%(color:reset))'"
-    end
-
     if test -f ~/.config.fish.local
         source ~/.config.fish.local
     end

@@ -46,3 +46,22 @@
 [mergetool "studio"]
     cmd = studio merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     trustExitCode = true
+
+[alias]
+    br = branch
+	co = checkout
+    ci = commit -m
+    ac = commit --amend -m
+    acq = commit --amend --no-edit
+    st = status -s
+    last = log -1 HEAD
+	ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
+    ll = ls --numstat
+    sl = stash list
+    sp = stash pop
+    ss = stash show -p
+    unstage = restore --staged
+    untrack = rm --cached
+    branches = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:human)%(color:reset))'
+    orphans = fetch --prune && for-each-ref refs/heads --format '%(if:equals=gone)%(upstream:track,nobracket)%(then)%(refname:short)%(else)%(end)' | awk '$1{print $1}'
+    cull = "!f() { for branch in $(git orphans | awk 'NR>1'); do git branch -D $branch; done }; f"
