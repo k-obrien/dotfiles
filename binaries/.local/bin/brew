@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+source common || exit 1
+
+brew=/opt/homebrew/bin/brew
+
+_depend_on ${brew}
+
+${brew} ${*} && ${brew} bundle dump --file=~/.dotfiles/brewfile --force
