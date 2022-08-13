@@ -39,15 +39,16 @@ if status is-interactive
     set -U tide_right_prompt_suffix
 
     set -gx fzf_fd_opts --ignore-file .fzffdignore
-    set -gx fzf_preview_dir_cmd exa --all --color=always --oneline
+    set -gx fzf_preview_dir_cmd exa --color=always --oneline
 
     alias raycast "osascript -e 'quit app \"Raycast\"' && open -a raycast"
 
     type -q bat && alias cat bat
     type -q dust && alias du dust
+    type -q fd && alias find fd
     type -q gpgconf && alias gakill "gpgconf --kill gpg-agent"
     type -q procs && alias ps procs
-    type -q rg && alias grep "rg --hidden -e"
+    type -q rg && alias grep "rg -e"
     type -q xman && alias man xman
 
     if type -q codium
@@ -56,15 +57,10 @@ if status is-interactive
         alias merge "codium --merge"
     end
     
-    if type -q fd
-        alias fd "fd --hidden"
-        alias find "fd --hidden"
-    end
-
     if type -q exa
-        alias ll "exa --all --group-directories-first --long --binary --group --time-style=long-iso --git"
-        alias ls "exa --all --group-directories-first"
-        alias tree "exa --all --group-directories-first --tree"
+        alias ls "exa --group-directories-first"
+        alias ll "exa --group-directories-first --long --binary --group --time-style=long-iso --git"
+        alias tree "exa --group-directories-first --tree"
     end
 
     if test -f ~/.config.fish.local
