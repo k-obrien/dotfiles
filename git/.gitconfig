@@ -48,16 +48,19 @@
     trustExitCode = true
 
 [alias]
-    br = branch
-	co = checkout
-    ci = commit -m
-    ac = commit --amend -m
-    acq = commit --amend --no-edit
+    alias = "!git config -l | grep alias | cut -c 7-"
     st = status -s
     last = log -1 HEAD
     hist = log -u
 	ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
     ll = ls --numstat
+    dc = diff --cached
+	co = checkout
+    ci = commit -m
+    ac = commit --amend -m
+    acq = commit --amend --no-edit
+    uc = reset HEAD~
+    br = branch
     sl = stash list
     sp = stash pop
     ss = stash show -p
