@@ -11,8 +11,8 @@ WWW_ROOT=${1:-.}
 cd "$WWW_ROOT" &> /dev/null || _error_exit "No such directory."
 
 # Check the files in the web root directory for HTML content
-grep -Eiqs "<x?html?>" -- * || _error_exit "No HTML files found."
+command grep -Eiqs "<x?html?>" -- * || _error_exit "No HTML files found."
 
 # Start the server and open a browser
-/usr/bin/env python3 -m SimpleHTTPServer 8000 &
+python3 -m SimpleHTTPServer 8000 &
 open http://localhost:8000
