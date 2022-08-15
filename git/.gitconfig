@@ -54,7 +54,7 @@
     hist = log -u
 	ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
     ll = ls --numstat
-    dc = diff --cached
+    ds = diff --staged
 	co = checkout
     ci = commit -m
     ac = commit --amend -m
