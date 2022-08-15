@@ -109,6 +109,6 @@ case $1 in
         ;;
 
     *)
-        $adb "$*"
+        $adb $*
         ;;
 esac

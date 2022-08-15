@@ -5,4 +5,4 @@ source common || exit 1
 _depend_on tr
 _depend_on pbcopy
 
-"$*" | tr -d '\n' | pbcopy
+$* | tr -d '\n' | pbcopy
