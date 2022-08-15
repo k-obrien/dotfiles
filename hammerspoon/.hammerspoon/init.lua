@@ -15,17 +15,6 @@ if hs.spoons.isInstalled("ReloadConfiguration") then
     spoon.ReloadConfiguration:start()
 end
 
--- Dismiss network interruption warning
-function applicationWatcher(appName, eventType, appObject)
-    if (eventType == hs.application.watcher.activated) then
-        if (appName == "loginwindow") and hs.window.get(1692) then
-            hs.osascript.applescriptFromFile("~/.local/bin/ignore-network-interruption.applescript")
-        end
-    end
-end
-
-appWatcher = hs.application.watcher.new(applicationWatcher):start()
-
 function applyWindowLayout()
     local externalScreen = "LG HDR WQHD+"
     local internalScreen = "Built-in Retina Display"
