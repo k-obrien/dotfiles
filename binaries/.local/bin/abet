@@ -4,4 +4,4 @@ source common || exit 1
 
 _depend_on bat
 
-"${*}" --help 2>&1 | bat --plain --language=help
+"$*" --help 2>&1 | bat --plain --language=help

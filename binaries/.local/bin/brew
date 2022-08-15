@@ -6,4 +6,4 @@ brew=/opt/homebrew/bin/brew
 
 _depend_on $brew
 
-$brew "${*}" && $brew bundle dump --file=~/.dotfiles/brewfile --force
+$brew "$*" && $brew bundle dump --file=~/.dotfiles/brewfile --force

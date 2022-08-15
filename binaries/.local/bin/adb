@@ -1,0 +1,114 @@
+#!/usr/bin/env zsh
+
+source common || exit 1
+
+adb="${HOME}/Library/Android/sdk/platform-tools/adb"
+
+_depend_on $adb
+
+FLOAT=^[0-9]*\.?[0-9]+$
+INT=^[0-9]+$
+
+case $1 in
+    animation_scale)
+        local scale
+        case $2 in
+            off)
+                scale=0.0
+                ;;
+
+            0 | 0.5 | .5 | 1 | 1.5 | 2 | 2.5 | 5 | 10)
+                scale=$2
+                ;;
+
+            *)
+                error_exit "Valid values: off, 0, .5, 1, 1.5, 2, 2.5, 5, 10"
+                ;;
+        esac
+        $adb shell settings put global transition_animation_scale $scale
+        $adb shell settings put global window_animation_scale $scale
+        $adb shell settings put global animator_duration_scale $scale
+        ;;
+
+    font_scale)
+        local scale=1.0
+        case $2 in
+            small)
+                scale=0.85
+                ;;
+
+            default)
+                scale=1.0
+                ;;
+
+            large)
+                scale=1.15
+                ;;
+
+            largest)
+                scale=1.30
+                ;;
+
+            *)
+                [[ $2 =~ $FLOAT ]] && scale=$2
+                ;;
+        esac
+        $adb shell settings put system font_scale $scale
+        ;;
+
+    input_keyevent)
+        local repeat=1
+        [[ $3 =~ $INT ]] && repeat=$3
+        repeat $repeat $adb shell input keyevent $2
+        ;;
+
+    input_tap)
+        local repeat=1
+        [[ $4 =~ $INT ]] && repeat=$4
+        repeat $repeat $adb shell input tap $2 $3
+        ;;
+
+    input_text)
+        $adb shell input text $2
+        ;;
+
+    show_layout_bounds)
+        local show
+        case $2 in
+            true | 1) show="true";;
+            false | 0) show="false";;
+            *) exit 1;;
+        esac
+        $adb shell setprop debug.layout $show
+        $adb shell service call activity 1599295570 > /dev/null
+        ;;
+
+    show_touches)
+        local show
+        case $2 in
+            true | 1) show=1;;
+            false | 0) show=0;;
+            *) exit 1;;
+        esac
+        $adb shell settings put system show_touches $show
+        ;;
+
+    talkback)
+        local namespace
+        case $2 in
+            on | 1)
+                namespace="com.google.android.marvin.talkback"
+                ;;
+
+            off | 0)
+                namespace="com.android.talkback"
+                ;;
+            *) exit 1;;
+        esac
+        $adb shell settings put secure enabled_accessibility_services "${namespace}/com.google.android.marvin.talkback.TalkBackService"
+        ;;
+
+    *)
+        $adb "$*"
+        ;;
+esac

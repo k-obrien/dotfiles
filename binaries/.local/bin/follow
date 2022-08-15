@@ -5,4 +5,4 @@ source common || exit 1
 _depend_on tail
 _depend_on bat
 
-tail -f "${*}" | bat --paging=never --language=log
+tail -f "$*" | bat --paging=never --language=log
