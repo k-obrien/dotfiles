@@ -66,4 +66,6 @@ if status is-interactive
     if test -f ~/.config.fish.local
         source ~/.config.fish.local
     end
+
+    bind --user \eb push-line
 end
