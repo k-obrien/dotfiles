@@ -22,7 +22,7 @@ case $1 in
                 ;;
 
             *)
-                error_exit "Valid values: off, 0, .5, 1, 1.5, 2, 2.5, 5, 10"
+                _error_exit "Valid values: off, 0, .5, 1, 1.5, 2, 2.5, 5, 10"
                 ;;
         esac
         $adb shell settings put global transition_animation_scale $scale
