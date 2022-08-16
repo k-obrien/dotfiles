@@ -13,17 +13,9 @@ case $1 in
     animation_scale)
         local scale
         case $2 in
-            off)
-                scale=0.0
-                ;;
-
-            0 | 0.5 | .5 | 1 | 1.5 | 2 | 2.5 | 5 | 10)
-                scale=$2
-                ;;
-
-            *)
-                _error_exit "Valid values: off, 0, .5, 1, 1.5, 2, 2.5, 5, 10"
-                ;;
+            off) scale=0.0;;
+            0 | 0.5 | .5 | 1 | 1.5 | 2 | 2.5 | 5 | 10) scale=$2;;
+            *) _error_exit "Valid values: off, 0, .5, 1, 1.5, 2, 2.5, 5, 10";;
         esac
         $adb shell settings put global transition_animation_scale $scale
         $adb shell settings put global window_animation_scale $scale
@@ -33,25 +25,11 @@ case $1 in
     font_scale)
         local scale=1.0
         case $2 in
-            small)
-                scale=0.85
-                ;;
-
-            default)
-                scale=1.0
-                ;;
-
-            large)
-                scale=1.15
-                ;;
-
-            largest)
-                scale=1.30
-                ;;
-
-            *)
-                [[ $2 =~ $FLOAT ]] && scale=$2
-                ;;
+            small) scale=0.85;;
+            default) scale=1.0;;
+            large) scale=1.15;;
+            largest) scale=1.30;;
+            *) [[ $2 =~ $FLOAT ]] && scale=$2;;
         esac
         $adb shell settings put system font_scale $scale
         ;;
@@ -96,13 +74,8 @@ case $1 in
     talkback)
         local namespace
         case $2 in
-            on | 1)
-                namespace="com.google.android.marvin.talkback"
-                ;;
-
-            off | 0)
-                namespace="com.android.talkback"
-                ;;
+            on | 1) namespace="com.google.android.marvin.talkback";;
+            off | 0) namespace="com.android.talkback";;
             *) exit 1;;
         esac
         $adb shell settings put secure enabled_accessibility_services "${namespace}/com.google.android.marvin.talkback.TalkBackService"
