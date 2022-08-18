@@ -58,7 +58,7 @@ postureMenuBarItem = hs.menubar.new()
 sitting = true
 
 function setPosture(sitting)
-    postureMenuBarItem:setTitle(sitting and "SITTING" or "STANDING")
+    postureMenuBarItem:setTitle(sitting and "—" or "⏐")
 end
 
 function cancelNotifications()
