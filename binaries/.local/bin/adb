@@ -50,6 +50,21 @@ case $1 in
         $adb shell input text $2
         ;;
 
+    proxy)
+        local ip_port
+        case $2 in
+            on | 1)
+                local ip="$(ifconfig -l | xargs -n1 ipconfig getifaddr)"
+                [[ -n ip ]] || _error_exit "No local IP address"
+                local port="${3:-"9090"}"
+                ip_port="${ip}:${port}"
+                ;;
+            off | 0) ip_port=":0";;
+            *) exit 1;;
+        esac
+        $adb shell settings put global http_proxy $ip_port
+        ;;
+
     show_layout_bounds)
         local show
         case $2 in
