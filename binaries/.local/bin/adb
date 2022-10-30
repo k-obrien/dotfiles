@@ -6,101 +6,128 @@ adb="${HOME}/Library/Android/sdk/platform-tools/adb"
 
 _depend_on $adb
 
-FLOAT=^[0-9]*\.?[0-9]+$
-INT=^[0-9]+$
+device_option=
 
-case $1 in
-    animation_scale)
-        local scale
-        case $2 in
-            off) scale=0.0;;
-            0 | 0.5 | .5 | 1 | 1.5 | 2 | 2.5 | 5 | 10) scale=$2;;
-            *) _error_exit "Valid values: off, 0, .5, 1, 1.5, 2, 2.5, 5, 10";;
-        esac
-        $adb shell settings put global transition_animation_scale $scale
-        $adb shell settings put global window_animation_scale $scale
-        $adb shell settings put global animator_duration_scale $scale
-        ;;
+while :; do
+    case $1 in
+        -d | -e)
+            device_option=$1
+            ;;
 
-    font_scale)
-        local scale=1.0
-        case $2 in
-            small) scale=0.85;;
-            default) scale=1.0;;
-            large) scale=1.15;;
-            largest) scale=1.30;;
-            *) [[ $2 =~ $FLOAT ]] && scale=$2;;
-        esac
-        $adb shell settings put system font_scale $scale
-        ;;
+        -s)
+            [[ $# -eq 3 ]] && device_option="${1} ${2}" || _error_exit "Device serial required"
+            shift
+            ;;
 
-    input_keyevent)
-        local repeat=1
-        [[ $3 =~ $INT ]] && repeat=$3
-        repeat $repeat $adb shell input keyevent $2
-        ;;
+        animation_scale)
+            local scale
+            case $2 in
+                off) scale=0.0;;
+                0 | 0.5 | .5 | 1 | 1.5 | 2 | 2.5 | 5 | 10) scale=$2;;
+                *) _error_exit "Valid values: off, 0, .5, 1, 1.5, 2, 2.5, 5, 10";;
+            esac
+            $adb $device_option shell settings put global transition_animation_scale $scale
+            $adb $device_option shell settings put global window_animation_scale $scale
+            $adb $device_option shell settings put global animator_duration_scale $scale
+            exit
+            ;;
 
-    input_tap)
-        local repeat=1
-        [[ $4 =~ $INT ]] && repeat=$4
-        repeat $repeat $adb shell input tap $2 $3
-        ;;
+        font_scale)
+            local scale=1.0
+            case $2 in
+                small) scale=0.85;;
+                default) scale=1.0;;
+                large) scale=1.15;;
+                largest) scale=1.30;;
+                *) [[ $2 =~ $FLOAT ]] && scale=$2;;
+            esac
+            $adb $device_option shell settings put system font_scale $scale
+            exit
+            ;;
 
-    input_text)
-        $adb shell input text $2
-        ;;
+        input_keyevent)
+            [[ $2 ]] || _error_exit "Key event required"
+            local repeat=1
+            [[ $3 =~ $INT ]] && repeat=$3
+            repeat $repeat $adb $device_option shell input keyevent $2
+            exit
+            ;;
 
-    proxy)
-        local ip_port
-        case $2 in
-            on | 1)
-                local ip="$(ifconfig -l | xargs -n1 ipconfig getifaddr)"
-                [[ -n ip ]] || _error_exit "No local IP address"
-                local port="${3:-"9090"}"
-                ip_port="${ip}:${port}"
-                ;;
-            off | 0) ip_port=":0";;
-            *) exit 1;;
-        esac
-        $adb shell settings put global http_proxy $ip_port
-        ;;
+        input_tap)
+            _require_int $2 "X must be integer"
+            _require_int $3 "Y must be integer"
+            local repeat=1
+            [[ $4 =~ $INT ]] && repeat=$4
+            repeat $repeat $adb $device_option shell input tap $2 $3
+            exit
+            ;;
 
-    show_layout_bounds)
-        local show
-        case $2 in
-            true | 1) show="true";;
-            false | 0) show="false";;
-            *) exit 1;;
-        esac
-        $adb shell setprop debug.layout $show
-        $adb shell service call activity 1599295570 > /dev/null
-        ;;
+        input_text)
+            [[ $2 ]] || _error_exit "Input text required"
+            $adb $device_option shell input text $2
+            exit
+            ;;
 
-    show_touches)
-        local show
-        case $2 in
-            true | 1) show=1;;
-            false | 0) show=0;;
-            *) exit 1;;
-        esac
-        $adb shell settings put system show_touches $show
-        ;;
+        proxy)
+            local ip_port
+            case $2 in
+                on | 1)
+                    local ip="$(ifconfig -l | xargs -n1 ipconfig getifaddr)"
+                    [[ -n ip ]] || _error_exit "No local IP address"
+                    local port="${3:-"9090"}"
+                    _require_int $port "Port must be integer"
+                    ip_port="${ip}:${port}"
+                    ;;
+                off | 0) ip_port=":0";;
+                *) _error_exit "Valid values: on, off";;
+            esac
+            $adb $device_option shell settings put global http_proxy $ip_port
+            exit
+            ;;
 
-    talkback)
-        local namespace
-        case $2 in
-            on | 1) namespace="com.google.android.marvin.talkback";;
-            off | 0) namespace="com.android.talkback";;
-            *) exit 1;;
-        esac
-        $adb shell settings put secure enabled_accessibility_services "${namespace}/com.google.android.marvin.talkback.TalkBackService"
-        ;;
+        show_layout_bounds)
+            local show
+            case $2 in
+                true | 1) show="true";;
+                false | 0) show="false";;
+                *) _error_exit "Valid values: true, false";;
+            esac
+            $adb $device_option shell setprop debug.layout $show
+            $adb $device_option shell service call activity 1599295570 > /dev/null
+            exit
+            ;;
 
-    tapxy)
-        $adb shell getevent -l | awk '/ABS_MT_POSITION/ {print ("0x"$4)+0}'
-        ;;
+        show_touches)
+            local show
+            case $2 in
+                true | 1) show=1;;
+                false | 0) show=0;;
+                *) _error_exit "Valid values: true, false";;
+            esac
+            $adb $device_option shell settings put system show_touches $show
+            exit
+            ;;
 
-    *)
-        $adb $*
-        ;;
-esac
+        talkback)
+            local namespace
+            case $2 in
+                on | 1) namespace="com.google.android.marvin.talkback";;
+                off | 0) namespace="com.android.talkback";;
+                *) _error_exit "Valid values: on, off";;
+            esac
+            $adb $device_option shell settings put secure enabled_accessibility_services "${namespace}/com.google.android.marvin.talkback.TalkBackService"
+            exit
+            ;;
+
+        tapxy)
+            $adb $device_option shell getevent -l | awk '/ABS_MT_POSITION/ {print ("0x"$4)+0}'
+            exit
+            ;;
+
+        *)
+            $adb $device_option $*
+            exit
+            ;;
+    esac
+    shift
+done
