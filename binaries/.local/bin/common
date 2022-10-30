@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+set -o errexit
+set -o pipefail
+
+FLOAT=^[0-9]*\.?[0-9]+$
+INT=^[0-9]+$
+
 _error_exit() {
     echo "$1" >&2
     exit 1
@@ -7,4 +13,12 @@ _error_exit() {
 
 _depend_on() {
     type "$1" &>/dev/null || _error_exit "missing dependency: ${1}"
+}
+
+_require_int() {
+    [[ $1 =~ $INT ]] || _error_exit ${2:-"Expected an integer: $1"}
+}
+
+_require_float() {
+    [[ $1 =~ $FLOAT ]] || _error_exit ${2:-"Expected a float: $1"}
 }
