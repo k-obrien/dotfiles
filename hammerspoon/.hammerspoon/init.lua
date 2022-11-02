@@ -94,7 +94,7 @@ end
 -- Global modifier key; assigned to Caps Lock in Karabiner
 modifier = { "ctrl", "cmd", "alt", "shift" }
 
--- Show hotkey assignments
+-- >>> Show hotkey assignments
 local function showHelp()
     local hotkeys = hs.hotkey.getHotkeys()
     local legend = ""
@@ -109,17 +109,53 @@ end
 
 hs.hotkey.alertDuration = 0
 hs.hotkey.bind(modifier, "a", showHelp, hs.alert.closeAll)
+-- <<<
 
+-- >>> Switch user
 function switchUser()
     local path = table.concat({ "/Users/", hs.caffeinate.sessionProperties()["kCGSSessionUserNameKey"], "/.local/bin/fast-user-switch.applescript" })
     hs.osascript.applescriptFromFile(path)
 end
 
--- Switch user
 hs.hotkey.bind(modifier, "s", "Switch user", switchUser)
+-- <<<
 
 -- Apply a predefined window layout
 hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
 
 -- Defeat paste-blocking
 hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+
+-- >>> Show Phonetic Alphabet
+local function showPhoneticAlphabet()
+    local alphabet = "A\tAlpha\t\t" ..
+                     "N\tNovember\n" ..
+                     "B\tBravo\t\t" ..
+                     "O\tOscar\n" ..
+                     "C\tCharlie\t\t" ..
+                     "P\tPapa\n" ..
+                     "D\tDelta\t\t\t" ..
+                     "Q\tQuebec\n" ..
+                     "E\tEcho\t\t\t" ..
+                     "R\tRomeo\n" ..
+                     "F\tFoxtrot\t\t" ..
+                     "S\tSierra\n" ..
+                     "G\tGolf\t\t\t" ..
+                     "T\tTango\n" ..
+                     "H\tHotel\t\t\t" ..
+                     "U\tUniform\n" ..
+                     "I\tIndia\t\t\t" ..
+                     "V\tVictor\n" ..
+                     "J\tJuliet\t\t\t" ..
+                     "W\tWhisky\n" ..
+                     "K\tKilo\t\t\t" ..
+                     "X\tX-Ray\n" ..
+                     "L\tLima\t\t\t" ..
+                     "Y\tYankee\n" ..
+                     "M\tMike\t\t\t" ..
+                     "Z\tZulu\n"
+    hs.alert.show(alphabet:sub(1, -2), 3600)
+end
+
+hs.hotkey.bind(modifier, "p", "Phonetic Alphabet", showPhoneticAlphabet, hs.alert.closeAll)
+-- <<<
