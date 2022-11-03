@@ -43,7 +43,6 @@ if status is-interactive
 
     type -q bat && alias cat bat
     type -q dust && alias du dust
-    type -q fd && alias find fd
     type -q gpgconf && alias gakill "gpgconf --kill gpg-agent"
     type -q procs && alias ps procs
     type -q rg && alias grep "rg -e"
@@ -54,10 +53,17 @@ if status is-interactive
         alias diff "codium --diff"
         alias merge "codium --merge"
     end
-    
+
+    if type -q fd
+        alias find fd
+        alias find! "fd --no-ignore -H"
+    end
+
     if type -q exa
         alias ls "exa --group-directories-first"
+        alias ls! "exa --group-directories-first --all"
         alias ll "exa --group-directories-first --long --binary --group --time-style=long-iso --git"
+        alias ll! "exa --group-directories-first --long --binary --group --time-style=long-iso --git --all"
         alias tree "exa --group-directories-first --tree"
     end
 
