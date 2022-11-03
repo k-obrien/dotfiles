@@ -10,6 +10,8 @@ if status is-interactive
 
     fish_add_path -g ~/.local/bin {$HOMEBREW_PREFIX}/{bin,sbin} {$ANDROID_HOME}/platform-tools
 
+    set -gx JAVA_HOME (/usr/libexec/java_home -a arm64)
+
     set -gx MANPATH (manpath)
     set -gx INFOPATH /opt/homebrew/share/info {$INFOPATH}
 
