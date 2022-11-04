@@ -57,6 +57,7 @@
     ds = diff --staged
 	co = checkout
     ci = commit -m
+    ca = "!git add . && git ci"
     ac = commit --amend -m
     acq = commit --amend --no-edit
     uc = reset HEAD~
