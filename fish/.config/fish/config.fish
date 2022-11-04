@@ -45,30 +45,30 @@ if status is-interactive
     set -gx fzf_fd_opts --ignore-file .fzffdignore
     set -gx fzf_preview_dir_cmd exa --color=always --oneline
 
-    type -q bat && alias cat bat
-    type -q dust && alias du dust
-    type -q gpgconf && alias gakill "gpgconf --kill gpg-agent"
-    type -q procs && alias ps procs
-    type -q rg && alias grep "rg -e"
-    type -q xman && alias man xman
+    type -q bat && abbr -a cat bat
+    type -q dust && abbr -a du dust
+    type -q gpgconf && abbr -a gakill "gpgconf --kill gpg-agent"
+    type -q procs && abbr -a ps procs
+    type -q rg && abbr -a grep "rg -e"
+    type -q xman && abbr -a man xman
 
     if type -q codium
-        alias edit codium
-        alias diff "codium --diff"
-        alias merge "codium --merge"
+        abbr -a edit codium
+        abbr -a diff codium --diff
+        abbr -a merge codium --merge
     end
 
     if type -q fd
-        alias find fd
-        alias find! "fd --no-ignore -H"
+        abbr -a find fd
+        abbr -a find! fd --no-ignore --hidden
     end
 
     if type -q exa
-        alias ls "exa --group-directories-first"
-        alias ls! "exa --group-directories-first --all"
-        alias ll "exa --group-directories-first --long --binary --group --time-style=long-iso --git"
-        alias ll! "exa --group-directories-first --long --binary --group --time-style=long-iso --git --all"
-        alias tree "exa --group-directories-first --tree"
+        abbr -a ls exa --group-directories-first
+        abbr -a ls! exa --group-directories-first --all
+        abbr -a ll exa --group-directories-first --long --binary --group --time-style=long-iso --git
+        abbr -a ll! exa --group-directories-first --long --binary --group --time-style=long-iso --git --all
+        abbr -a tree exa --group-directories-first --tree
     end
 
     if test -f ~/.config.fish.local
