@@ -5,8 +5,11 @@ hs.console.consoleCommandColor({ white = 1 })
 hs.console.consoleResultColor({ white = 0.8 })
 
 -- Set alert position and style
-hs.alert.defaultStyle["strokeColor"] = { white = 0, alpha = 0 }
-hs.alert.defaultStyle["textSize"] = 24
+hs.alert.defaultStyle.atScreenEdge = 2
+hs.alert.defaultStyle.textFont = "Menlo"
+hs.alert.defaultStyle.textSize = 24
+hs.alert.defaultStyle.strokeColor = { white = 0, alpha = 0 }
+hs.hotkey.alertDuration = 0
 
 -- Enable auto-reload on configuration change
 -- Requires ReloadConfiguration Spoon
@@ -104,10 +107,34 @@ local function showHelp()
         if msg ~= hotkeys[i].idx then legend = legend .. msg .. "\n" end
     end
 
-    hs.alert.show(legend:sub(1, -2), 3600)
+    legend = legend ..
+             "\n" ..
+             "⌥B:\tBelay current command\n" ..
+             "⌥S:\tPrepend sudo to current or previous command\n" ..
+             "⌥W:\tShow short description of app under cursor\n" ..
+             "⌥H:\tShow manpage for app under cursor\n" ..
+             "⌥L:\tList contents of directory under cursor or current directory\n" ..
+             "⌥E:\tEdit command in editor\n" ..
+             "⌥C:\tCapitalise first letter of word under cursor\n" ..
+             "⌥U:\tCapitalise word under cursor\n" ..
+             "^T:\tTranspose current and previous character\n" ..
+             "⌥T:\tTranpose current and previous word\n" ..
+             "^Z:\tUndo most recent line edit\n" ..
+             "⌥/:\tRevert most recent undo of line edit\n\n" ..
+             "^R:\t\tSearch command history\n" ..
+             "^V:\t\tSearch environment variables\n" ..
+             "^⌥F:\tSearch current directory\n" ..
+             "^⌥L:\tSearch git log\n" ..
+             "^⌥L:\tSearch git status\n" ..
+             "^⌥P:\tSearch processes\n\n" ..
+             "^[AE]:\tMove cursor to start/end of line\n" ..
+             "⌥[←→]:\tMove cursor one inclusive word OR navigate directory stack\n" ..
+             "⇧[←→]:\tMove cursor one exclusive word OR accept big word of autosuggestion\n" ..
+             "⌥[↑↓]:\tSearch history for instances of original token under cursor\n"
+
+    hs.alert.show(legend:sub(1, -2), "infinite")
 end
 
-hs.hotkey.alertDuration = 0
 hs.hotkey.bind(modifier, "a", showHelp, hs.alert.closeAll)
 -- <<<
 
@@ -128,9 +155,9 @@ hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap
 
 -- >>> Show Phonetic Alphabet
 local function showPhoneticAlphabet()
-    local alphabet = "A\tAlpha\t\t" ..
+    local alphabet = "A\tAlpha\t\t\t" ..
                      "N\tNovember\n" ..
-                     "B\tBravo\t\t" ..
+                     "B\tBravo\t\t\t" ..
                      "O\tOscar\n" ..
                      "C\tCharlie\t\t" ..
                      "P\tPapa\n" ..
@@ -146,7 +173,7 @@ local function showPhoneticAlphabet()
                      "U\tUniform\n" ..
                      "I\tIndia\t\t\t" ..
                      "V\tVictor\n" ..
-                     "J\tJuliet\t\t\t" ..
+                     "J\tJuliet\t\t" ..
                      "W\tWhisky\n" ..
                      "K\tKilo\t\t\t" ..
                      "X\tX-Ray\n" ..
@@ -154,7 +181,7 @@ local function showPhoneticAlphabet()
                      "Y\tYankee\n" ..
                      "M\tMike\t\t\t" ..
                      "Z\tZulu\n"
-    hs.alert.show(alphabet:sub(1, -2), 3600)
+    hs.alert.show(alphabet:sub(1, -2), "infinite")
 end
 
 hs.hotkey.bind(modifier, "p", "Phonetic Alphabet", showPhoneticAlphabet, hs.alert.closeAll)
