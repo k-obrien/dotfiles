@@ -51,6 +51,7 @@ if status is-interactive
     type -q procs && abbr -a ps procs
     type -q rg && abbr -a grep "rg -e"
     type -q xman && abbr -a man xman
+    type -q xcodebuild && abbr -a accept-xcb-license "sudo xcodebuild -license accept"
 
     if type -q codium
         abbr -a edit codium
