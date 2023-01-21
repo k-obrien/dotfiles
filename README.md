@@ -8,13 +8,19 @@ brew bundle install --file path/to/dotfiles/brewfile
 
 2. Start fish shell and install [fisher](https://github.com/jorgebucaran/fisher).
 
-3. Stow dotfiles. Don't do this earlier or some may be overwritten.
+3. Delete default fish config and plugins files to make way for stowed versions.
+```shell
+rm ~/.config/fish/config.fish
+rm ~/.config/fish/fish_plugins
+```
+
+4. Stow dotfiles. Don't do this earlier or some may be overwritten.
 ```shell
 cd path/to/dotfiles
 stow fish binaries ...
 ```
 
-4. Install fish plugins.
+5. Install fish plugins.
 ```shell
-fish -c "fisher update"
+fisher update
 ```
