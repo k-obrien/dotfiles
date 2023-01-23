@@ -85,7 +85,7 @@ function postureClicked()
             informativeText = sitting and "Stand up" or "Sit down", 
             withdrawAfter = 0
         }
-    ):schedule(os.time() + hs.timer.hours(1))
+    ):schedule(os.time() + hs.timer.minutes(30))
 end
 
 if postureMenuBarItem then
