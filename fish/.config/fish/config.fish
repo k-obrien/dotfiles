@@ -1,6 +1,4 @@
 if status is-interactive
-    set -gx GPG_TTY (tty)
-
     set -gx HOMEBREW_PREFIX /opt/homebrew
     set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX
     set -gx HOMEBREW_CELLAR {$HOMEBREW_PREFIX}/Cellar
@@ -47,7 +45,6 @@ if status is-interactive
 
     type -q bat && abbr -a cat bat
     type -q dust && abbr -a du dust
-    type -q gpgconf && abbr -a gakill "gpgconf --kill gpg-agent"
     type -q procs && abbr -a ps procs
     type -q rg && abbr -a grep "rg -e"
     type -q xman && abbr -a man xman

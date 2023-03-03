@@ -26,7 +26,9 @@
 	autoSetupRemote = true
 
 [gpg]
-    program = /opt/homebrew/bin/gpg
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.git_allowed_signers
 
 [diff]
     colorMoved = default
