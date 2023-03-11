@@ -1,12 +1,12 @@
 [include]
-    path = ~/.gitconfig.local
+    path = .gitconfig.local
 
 [user]
     name = Kieran O'Brien
 
 [core]
     autocrlf = input
-    excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore_global
     editor = codium --wait
     pager = delta
 
@@ -29,6 +29,7 @@
     format = ssh
 [gpg "ssh"]
     allowedSignersFile = ~/.git_allowed_signers
+    program = ssh-sign
 
 [diff]
     colorMoved = default
