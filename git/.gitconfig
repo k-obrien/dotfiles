@@ -61,6 +61,7 @@
 
 [alias]
     alias = "!git config -l | grep alias | cut -c 7-"
+    ec = config --global -e
     st = status -s
     last = log -1 HEAD
     hist = log -u
