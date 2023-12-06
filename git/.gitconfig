@@ -6,7 +6,7 @@
 
 [core]
     autocrlf = input
-	excludesFile = ~/.gitignore_global
+    excludesFile = ~/.gitignore_global
     editor = codium --wait
     pager = delta
 
@@ -16,8 +16,11 @@
 [init]
     defaultBranch = main
 
+[submodule]
+    recurse = true
+
 [fetch]
-	prune = true
+    prune = true
 
 [pull]
     rebase = true
@@ -26,7 +29,7 @@
     gpgSign = true
 
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
 
 [gpg]
     format = ssh
@@ -57,7 +60,7 @@
 
 [rebase]
     autoSquash = true
-	updateRefs = true
+    updateRefs = true
 
 [absorb]
     maxStack = 50
@@ -68,23 +71,27 @@
     st = status -s
     last = log -1 HEAD
     hist = log -u
-	ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
+    ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
     ll = ls --numstat
+    dif = diff --staged
+    pull-sub = submodule update --init --recursive
     br = branch
-	co = checkout
-    ci = commit -m
-    ca = "!git add . && git ci"
-    ac = commit --amend -m
-    acq = commit --amend --no-edit
-    undo-commit = reset HEAD~
-    diff-all = diff --staged
+    co = checkout
+    cob = co -b
+    ci = commit -am
+    ca = "!git add -A && git commit -m"
+    ac = commit --amend --no-edit -a
+    acm = commit --amend -am
+    uncommit = reset HEAD~
     unstage = restore --staged
     untrack = rm --cached
     sls = stash list
     spop = stash pop
     sshow = stash show -p
+    default-branch = symbolic-ref refs/remotes/origin/HEAD --short
     branches = for-each-ref refs/heads --sort=committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:human)%(color:reset))'
-    merged = "!git fetch --prune &> /dev/null && git branch --merged origin/main | awk '{ $1 = $1 }; 1'"
-    gone = "!git fetch --prune &> /dev/null && git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' | awk 'NF'"
-    cull = "!git gone | xargs git branch -D"
+    merged = "!git fetch -q && git branch --merged $(git default-branch) | awk '{ $1 = $1 }; 1'"
+    cull-merged = "!git merged | xargs git branch -D"
+    gone = "!git fetch -q && git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' | awk 'NF'"
+    cull-gone = "!git gone | xargs git branch -D"
     absorb = "!git-absorb"
