@@ -6,7 +6,7 @@
 
 [core]
     autocrlf = input
-	excludesfile = ~/.gitignore_global
+	excludesFile = ~/.gitignore_global
     editor = codium --wait
     pager = delta
 
@@ -20,7 +20,7 @@
 	prune = true
 
 [commit]
-    gpgsign = true
+    gpgSign = true
 
 [push]
 	autoSetupRemote = true
@@ -29,7 +29,6 @@
     format = ssh
 [gpg "ssh"]
     allowedSignersFile = ~/.git_allowed_signers
-    program = ssh-sign
 
 [diff]
     colorMoved = default
@@ -53,6 +52,13 @@
     cmd = codium --wait --merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     trustExitCode = true
 
+[rebase]
+    autoSquash = true
+	updateRefs = true
+
+[absorb]
+    maxStack = 50
+
 [alias]
     alias = "!git config -l | grep alias | cut -c 7-"
     st = status -s
@@ -60,19 +66,21 @@
     hist = log -u
 	ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
     ll = ls --numstat
-    ds = diff --staged
+    br = branch
 	co = checkout
     ci = commit -m
     ca = "!git add . && git ci"
     ac = commit --amend -m
     acq = commit --amend --no-edit
-    uc = reset HEAD~
-    br = branch
-    sl = stash list
-    sp = stash pop
-    ss = stash show -p
+    undo-commit = reset HEAD~
+    diff-all = diff --staged
     unstage = restore --staged
     untrack = rm --cached
+    sls = stash list
+    spop = stash pop
+    sshow = stash show -p
     branches = for-each-ref refs/heads --sort=committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:human)%(color:reset))'
-    gone = "! git fetch --prune &> /dev/null && git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' | awk 'NF'"
-    cull = "! git gone | xargs git branch -D"
+    merged = "!git fetch --prune &> /dev/null && git branch --merged origin/main | awk '{ $1 = $1 }; 1'"
+    gone = "!git fetch --prune &> /dev/null && git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' | awk 'NF'"
+    cull = "!git gone | xargs git branch -D"
+    absorb = "!git-absorb"
