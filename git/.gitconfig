@@ -19,6 +19,9 @@
 [fetch]
 	prune = true
 
+[pull]
+    rebase = true
+
 [commit]
     gpgSign = true
 
