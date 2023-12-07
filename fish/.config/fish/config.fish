@@ -6,7 +6,7 @@ if status is-interactive
 
     set -gx ANDROID_HOME ~/Library/Android/sdk
 
-    fish_add_path -g ~/.local/bin {$HOMEBREW_PREFIX}/{bin,sbin} {$ANDROID_HOME}/platform-tools
+    fish_add_path -g ~/.local/bin {$HOMEBREW_PREFIX}/{bin,sbin} {$ANDROID_HOME}/platform-tools "/Applications/Android Studio.app/Contents/MacOS"
 
     set -gx JAVA_HOME (/usr/libexec/java_home -a arm64)
     set -gx STUDIO_JDK $JAVA_HOME
@@ -15,6 +15,7 @@ if status is-interactive
     set -gx MANPATH (manpath)
     set -gx INFOPATH /opt/homebrew/share/info {$INFOPATH}
 
+    set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
     set -gx LESS --IGNORE-CASE --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --status-column --tabs=4 --window=-4
 
     type -q codium && set -gx VISUAL codium --wait
@@ -48,7 +49,6 @@ if status is-interactive
     type -q procs && abbr -a ps procs
     type -q rg && abbr -a grep "rg -e"
     type -q xman && abbr -a man xman
-    type -q xcodebuild && abbr -a accept-xcb-license "sudo xcodebuild -license accept"
 
     if type -q codium
         abbr -a edit codium
