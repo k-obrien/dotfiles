@@ -42,7 +42,7 @@ if status is-interactive
     set -U tide_right_prompt_suffix
 
     set -gx fzf_fd_opts --ignore-file .fzffdignore
-    set -gx fzf_preview_dir_cmd exa --color=always --oneline
+    set -gx fzf_preview_dir_cmd eza --color=always --oneline
 
     type -q bat && abbr -a cat bat
     type -q dust && abbr -a du dust
@@ -61,12 +61,12 @@ if status is-interactive
         abbr -a find! fd --no-ignore --hidden
     end
 
-    if type -q exa
-        abbr -a ls exa --group-directories-first
-        abbr -a ls! exa --group-directories-first --all
-        abbr -a ll exa --group-directories-first --long --binary --group --time-style=long-iso --git
-        abbr -a ll! exa --group-directories-first --long --binary --group --time-style=long-iso --git --all
-        abbr -a tree exa --group-directories-first --tree
+    if type -q eza
+        abbr -a ls eza --group-directories-first
+        abbr -a ls! eza --group-directories-first --all
+        abbr -a ll eza --group-directories-first --long --binary --group --time-style=long-iso --git
+        abbr -a ll! eza --group-directories-first --long --binary --group --time-style=long-iso --git --all
+        abbr -a tree eza --group-directories-first --tree
     end
 
     if test -f ~/.config.fish.local
