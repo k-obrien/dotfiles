@@ -83,6 +83,7 @@
     ca = "!git add -A && git commit -m"
     ac = commit --amend --no-edit -a
     acm = commit --amend -am
+    pushf = push --force-with-lease
     uncommit = reset HEAD~
     unstage = restore --staged
     untrack = rm --cached
