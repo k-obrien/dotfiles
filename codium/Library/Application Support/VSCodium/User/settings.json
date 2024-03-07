@@ -1,0 +1,15 @@
+{
+    "workbench.startupEditor": "none",
+    "security.workspace.trust.enabled": false,
+    "files.autoSave": "afterDelay",
+    "git.openRepositoryInParentFolders": "always",
+	"terminal.integrated.profiles.osx": {
+		"fish": {
+			"path": "/opt/homebrew/bin/fish",
+			"args": [
+				"-l"
+			]
+		},
+    },
+    "terminal.integrated.defaultProfile.osx": "fish",
+}
