@@ -30,6 +30,7 @@
 
 [push]
     autoSetupRemote = true
+    useForceIfIncludes = true
 
 [gpg]
     format = ssh
