@@ -125,7 +125,7 @@ local function showHelp()
              "^V:\t\tSearch environment variables\n" ..
              "^⌥F:\tSearch current directory\n" ..
              "^⌥L:\tSearch git log\n" ..
-             "^⌥L:\tSearch git status\n" ..
+             "^⌥S:\tSearch git status\n" ..
              "^⌥P:\tSearch processes\n\n" ..
              "^[AE]:\tMove cursor to start/end of line\n" ..
              "⌥[←→]:\tMove cursor one inclusive word OR navigate directory stack\n" ..
