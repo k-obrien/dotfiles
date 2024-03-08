@@ -41,7 +41,7 @@ if status is-interactive
     set -U tide_right_prompt_prefix \x20
     set -U tide_right_prompt_suffix
 
-    set -gx fzf_fd_opts --ignore-file .fzffdignore
+    set -gx fzf_fd_opts --ignore-file ~/.config/fzffd/fzffdignore
     set -gx fzf_preview_dir_cmd eza --color=always --oneline
 
     type -q bat && abbr -a cat bat
