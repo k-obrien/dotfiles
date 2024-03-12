@@ -1,12 +1,11 @@
 [include]
-    path = .gitconfig.local
+    path = ~/.config/git/config.local
 
 [user]
     name = Kieran O'Brien
 
 [core]
     autocrlf = input
-    excludesFile = ~/.gitignore_global
     editor = codium --wait
     pager = delta
 
@@ -34,16 +33,21 @@
 
 [gpg]
     format = ssh
+
 [gpg "ssh"]
-    allowedSignersFile = ~/.git_allowed_signers
+    allowedSignersFile = ~/.config/git/allowed_signers
 
 [diff]
+    algorithm = histogram
     colorMoved = default
     tool = vscodium
+
 [difftool]
     prompt = false
+
 [difftool "vscodium"]
     cmd = codium --wait --diff "$LOCAL" "$REMOTE"
+
 [delta]
     navigate = true
     side-by-side = true
@@ -51,15 +55,18 @@
     map-styles = bold purple => syntax magenta, bold cyan => syntax blue
 
 [merge]
-    conflictstyle = diff3
+    conflictStyle = zdiff3
     tool = vscodium
+
 [mergetool]
     prompt = false
+
 [mergetool "vscodium"]
     cmd = codium --wait --merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     trustExitCode = true
 
 [rebase]
+    autoStash = true
     autoSquash = true
     updateRefs = true
 
