@@ -10,10 +10,16 @@
     pager = delta
 
 [url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+    pushInsteadOf = https://github.com/
 
 [init]
     defaultBranch = main
+
+[status]
+    submoduleSummary = true
+
+[log]
+    date = iso
 
 [submodule]
     recurse = true
@@ -41,6 +47,7 @@
     algorithm = histogram
     colorMoved = default
     tool = vscodium
+    submodule = diff
 
 [difftool]
     prompt = false
