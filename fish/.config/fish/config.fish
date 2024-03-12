@@ -67,10 +67,11 @@ if status is-interactive
         abbr -a ll eza --group-directories-first --long --binary --group --time-style=long-iso --git
         abbr -a ll! eza --group-directories-first --long --binary --group --time-style=long-iso --git --all
         abbr -a tree eza --group-directories-first --tree
+        abbr -a tree! eza --group-directories-first --tree --all
     end
 
-    if test -f ~/.config.fish.local
-        source ~/.config.fish.local
+    if test -f ~/.config/fish/config.fish.local
+        source ~/.config/fish/config.fish.local
     end
 
     bind --user \eb push-line
