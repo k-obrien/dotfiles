@@ -18,14 +18,15 @@ trap _cleanup EXIT
 # all code goes below here or the trap won't be set
 
 function _show_usage() {
-    echo "usage: $(basename "$0") name
+cat << USAGE
+usage: $(basename "$0") name
 
 positional arguments:
     name  the name of a person to greet
 
 options:
     -h  show this message and exit
-"
+USAGE
 }
 
 function _get_default_name() {
