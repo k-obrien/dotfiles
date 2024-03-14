@@ -97,47 +97,6 @@ end
 -- Global modifier key; assigned to Caps Lock in Karabiner
 modifier = { "ctrl", "cmd", "alt", "shift" }
 
--- >>> Show hotkey assignments
-local function showHelp()
-    local hotkeys = hs.hotkey.getHotkeys()
-    local legend = ""
-
-    for i = 1, #hotkeys do
-        local msg = string.gsub(hotkeys[i].msg, ": ", ":\t", 1)
-        if msg ~= hotkeys[i].idx then legend = legend .. msg .. "\n" end
-    end
-
-    legend = legend ..
-             "\n" ..
-             "⌥B:\tBelay current command\n" ..
-             "⌥S:\tPrepend sudo to current or previous command\n" ..
-             "⌥W:\tShow short description of app under cursor\n" ..
-             "⌥H:\tShow manpage for app under cursor\n" ..
-             "⌥L:\tList contents of directory under cursor or current directory\n" ..
-             "⌥E:\tEdit command in editor\n" ..
-             "⌥C:\tCapitalise first letter of word under cursor\n" ..
-             "⌥U:\tCapitalise word under cursor\n" ..
-             "^T:\tTranspose current and previous character\n" ..
-             "⌥T:\tTranpose current and previous word\n" ..
-             "^Z:\tUndo most recent line edit\n" ..
-             "⌥/:\tRevert most recent undo of line edit\n\n" ..
-             "^R:\t\tSearch command history\n" ..
-             "^V:\t\tSearch environment variables\n" ..
-             "^⌥F:\tSearch current directory\n" ..
-             "^⌥L:\tSearch git log\n" ..
-             "^⌥S:\tSearch git status\n" ..
-             "^⌥P:\tSearch processes\n\n" ..
-             "^[AE]:\tMove cursor to start/end of line\n" ..
-             "⌥[←→]:\tMove cursor one inclusive word OR navigate directory stack\n" ..
-             "⇧[←→]:\tMove cursor one exclusive word OR accept big word of autosuggestion\n" ..
-             "⌥[↑↓]:\tSearch history for instances of original token under cursor\n"
-
-    hs.alert.show(legend:sub(1, -2), "infinite")
-end
-
-hs.hotkey.bind(modifier, "a", showHelp, hs.alert.closeAll)
--- <<<
-
 -- Apply a predefined window layout
 hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
 
