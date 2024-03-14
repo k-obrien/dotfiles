@@ -81,22 +81,22 @@
     maxStack = 50
 
 [alias]
-    alias = "!git config -l | grep alias | cut -c 7-"
+    alias = ! git config -l | grep alias | cut -c 7-
     ec = config --global -e
+    clone-with-submodules = clone --recurse-submodules
+    clone-submodules = submodule update --init --recursive
     st = status -s
     last = log -1 HEAD
-    hist = log -u
     ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
-    ll = ls --numstat
+    difflog = log -u
     staged = diff --staged
-    clone-sub = submodule update --init --recursive
     br = branch
     co = checkout
-    newb = co -b
-    ci = commit -am
-    ca = "!git add -A && git commit -m"
-    ac = commit --amend --no-edit -a
-    acm = commit --amend -am
+    nb = checkout -b
+    ci = commit -m
+    ca = ! git add -A && git commit -m
+    ac = ! git add -A && git commit --amend --no-edit
+    acm = ! git add -A && git commit --amend -m
     pushf = push --force-with-lease
     uncommit = reset HEAD~
     unstage = restore --staged
@@ -106,9 +106,9 @@
     sls = stash list
     spop = stash pop
     sshow = stash show -p
-    default-branch = !git symbolic-ref refs/remotes/origin/HEAD --short 
+    default-branch = ! git symbolic-ref refs/remotes/origin/HEAD --short 
     branches = for-each-ref refs/heads --sort=committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:human)%(color:reset))'
-    merged = !git fetch -q && git branch --merged "$(git default-branch)" | grep -v "$(git default-branch)" | grep -v "$(git symbolic-ref --short HEAD)" | grep -v "+" | xargs
-    cull = !git merged | xargs git branch -d
-    burn = !git merged | xargs git branch -D
-    absorb = !git-absorb
+    merged = ! git fetch -q && git branch --merged "$(git default-branch)" | grep -v "$(git default-branch)" | grep -v "$(git symbolic-ref --short HEAD)" | grep -v "+" | xargs
+    cull = ! git merged | xargs git branch -d
+    burn = ! git merged | xargs git branch -D
+    absorb = ! git-absorb
