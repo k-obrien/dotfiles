@@ -1,7 +1,7 @@
 if status is-interactive
     set -gx HOMEBREW_PREFIX /opt/homebrew
-    set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX
     set -gx HOMEBREW_CELLAR {$HOMEBREW_PREFIX}/Cellar
+    set -gx HOMEBREW_REPOSITORY $HOMEBREW_PREFIX
     set -gx HOMEBREW_NO_ANALYTICS 1
 
     set -gx ANDROID_HOME ~/Library/Android/sdk
@@ -13,7 +13,7 @@ if status is-interactive
     set -gx STUDIO_GRADLE_JDK $JAVA_HOME
 
     set -gx MANPATH (manpath)
-    set -gx INFOPATH /opt/homebrew/share/info {$INFOPATH}
+    set -gx INFOPATH {$HOMEBREW_PREFIX}/share/info {$INFOPATH}
 
     set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
     set -gx LESS --IGNORE-CASE --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --status-column --tabs=4 --window=-4
