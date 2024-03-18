@@ -18,6 +18,10 @@ if hs.spoons.isInstalled("ReloadConfiguration") then
     spoon.ReloadConfiguration:start()
 end
 
+-- Global modifier key; assigned to Caps Lock
+modifier = { "ctrl", "cmd", "alt", "shift" }
+
+-- >>> Apply a predefined window layout
 function applyWindowLayout()
     local externalScreen = "LG HDR WQHD+"
     local internalScreen = "Built-in Retina Display"
@@ -28,19 +32,35 @@ function applyWindowLayout()
     local dualScreenLayout = {
         { "Firefox", nil, externalScreen, firefoxPos, nil, nil },
         { "Android Studio", nil, externalScreen, { x = 0.35, y = 0, w = 0.65, h = 1 }, nil, nil },
-        { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil }
+        { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil },
+        { "Outlook", nil, internalScreen, hs.layout.maximized, nil, nil }
     }
     
     local singleScreenLayout = {
         { "Firefox", nil, internalScreen, hs.layout.maximized, nil, nil },
         { "Android Studio", nil, internalScreen, hs.layout.maximized, nil, nil },
-        { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil }
+        { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil },
+        { "Outlook", nil, internalScreen, hs.layout.maximized, nil, nil }
     }
     
     hs.layout.apply(numberOfScreens == 1 and singleScreenLayout or dualScreenLayout)
 end
 
 screenWatcher = hs.screen.watcher.new(applyWindowLayout)
+hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
+-- <<<
+
+-- >>> Toggle mute on Slack and Teams
+function toggleMute() 
+    local modifier = {"cmd", "shift"}
+    local teams = hs.application.get("com.microsoft.teams2")
+    if teams then hs.eventtap.keyStroke(modifier, "m", 0, teams) end
+    local slack = hs.application.get("com.tinyspeck.slackmacgap")
+    if slack then hs.eventtap.keyStroke(modifier, "space", 0, slack) end
+end
+
+hs.hotkey.bind(modifier, "a", "Toggle Mute", toggleMute)
+-- <<<
 
 -- Call functions on system state changes
 -- Requires StateActor Spoon
@@ -94,15 +114,6 @@ if postureMenuBarItem then
 end
 -- <<<
 
--- Global modifier key; assigned to Caps Lock in Karabiner
-modifier = { "ctrl", "cmd", "alt", "shift" }
-
--- Apply a predefined window layout
-hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
-
--- Defeat paste-blocking
-hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
-
 -- >>> Show Phonetic Alphabet
 local function showPhoneticAlphabet()
     local alphabet = "A\tAlpha\t\t\t" ..
@@ -136,3 +147,6 @@ end
 
 hs.hotkey.bind(modifier, "p", "Phonetic Alphabet", showPhoneticAlphabet, hs.alert.closeAll)
 -- <<<
+
+-- Defeat paste-blocking
+hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
