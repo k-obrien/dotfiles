@@ -90,9 +90,8 @@
     ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
     difflog = log -u
     staged = diff --staged
-    br = branch
     co = checkout
-    nb = checkout -b
+    nb = "! [ x$# == x1 ] && git fetch origin "$(basename "$(git default-branch)")":$1 && git checkout $1 #"
     ci = commit -m
     ca = ! git add -A && git commit -m
     ac = ! git add -A && git commit --amend --no-edit
