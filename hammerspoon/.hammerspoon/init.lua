@@ -22,7 +22,7 @@ end
 modifier = { "ctrl", "cmd", "alt", "shift" }
 
 -- >>> Apply a predefined window layout
-function applyWindowLayout()
+local function applyWindowLayout()
     local externalScreen = "LG HDR WQHD+"
     local internalScreen = "Built-in Retina Display"
     local numberOfScreens = #hs.screen.allScreens()
@@ -51,7 +51,7 @@ hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
 -- <<<
 
 -- >>> Toggle mute on Slack and Teams
-function toggleMute() 
+local function toggleMute() 
     local modifier = {"cmd", "shift"}
     local teams = hs.application.get("com.microsoft.teams2")
     if teams then hs.eventtap.keyStroke(modifier, "m", 0, teams) end
@@ -77,40 +77,40 @@ if hs.spoons.isInstalled("StateActor") then
 end
 
 -- >>> Sit/Stand menu item and notification
-postureMenuBarItem = hs.menubar.new()
 sitting = true
+changePostureMenuBarItem = hs.menubar.new()
+changePostureIntervalInSeconds = hs.timer.minutes(30)
+changePostureTimer = nil
 
-function setPosture(sitting)
-    postureMenuBarItem:setTitle(sitting and "—" or "⏐")
-end
-
-function cancelNotifications()
-    hs.notify.withdrawAll()
-    hs.notify.withdrawAllScheduled()
-end
-
-function postureClicked()
-    if (sitting) then
-        sitting = false
-    else
-        sitting = true
+local function resetChangePostureEffects()
+    if changePostureTimer then
+        changePostureTimer:stop()
+        changePostureTimer = nil
     end
-    
-    setPosture(sitting)
-    cancelNotifications()
+
+    hs.notify.withdrawAll()
+    hs.screen.setInvertedPolarity(false)
+end
+
+local function onChangePostureMenuBarItemClick()
+    sitting = not sitting
+    changePostureMenuBarItem:setTitle(sitting and "—" or "⏐")
+    resetChangePostureEffects()
     hs.notify.new(
-        cancelNotifications,
+        resetChangePostureEffects,
         { 
             title = "Change Posture", 
             informativeText = sitting and "Stand up" or "Sit down", 
             withdrawAfter = 0
         }
-    ):schedule(os.time() + hs.timer.minutes(30))
+    ):schedule(os.time() + changePostureIntervalInSeconds)
+    changePostureTimer = hs.timer.doAfter(changePostureIntervalInSeconds, function() hs.screen.setInvertedPolarity(true) end)
 end
 
-if postureMenuBarItem then
-    postureMenuBarItem:setClickCallback(postureClicked)
-    setPosture(sitting)
+if changePostureMenuBarItem then
+    hs.notify.withdrawAllScheduled()
+    changePostureMenuBarItem:setClickCallback(onChangePostureMenuBarItemClick)
+    onChangePostureMenuBarItemClick()
 end
 -- <<<
 
