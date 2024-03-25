@@ -89,6 +89,7 @@ local function resetChangePostureEffects()
     end
 
     hs.notify.withdrawAll()
+    hs.notify.withdrawAllScheduled()
     hs.screen.setInvertedPolarity(false)
 end
 
@@ -108,7 +109,6 @@ local function onChangePostureMenuBarItemClick()
 end
 
 if changePostureMenuBarItem then
-    hs.notify.withdrawAllScheduled()
     changePostureMenuBarItem:setClickCallback(onChangePostureMenuBarItemClick)
     onChangePostureMenuBarItemClick()
 end
