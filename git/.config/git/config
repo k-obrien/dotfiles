@@ -79,6 +79,7 @@
 
 [absorb]
     maxStack = 50
+    autoStageIfNothingStaged = true
 
 [alias]
     alias = ! git config --get-regexp alias | cut -c 7-
