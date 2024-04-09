@@ -4,8 +4,8 @@ set -o pipefail # surface errors in pipes
 set -o nounset  # prohibit undefined variables
 IFS=$'\n\t'     # split on newline or tab by default
 
-readonly _INT_REGEX="^[0-9]+$"
-readonly _FLOAT_REGEX="^[0-9]+\.[0-9]+$"
+readonly _INT_REGEX='^[0-9]+$'
+readonly _FLOAT_REGEX='^[0-9]+\.[0-9]+$'
 
 _depend_on() {
     for dependency in "$@"; do
@@ -19,28 +19,36 @@ _exit() {
 }
 
 _error_exit() {
-    echo "${1:-"An unknown error occurred"}" >&2
+    echo "${1:-An unknown error occurred}" >&2
     exit 1
 }
 
 _is_int() {
-    [[ "$1" =~ $_INT_REGEX ]]
+    [[ "${1:-}" =~ $_INT_REGEX ]]
 }
 
 _require_int() {
-    _is_int "$1" || _error_exit "${2:-"expected an integer"}"
+    _is_int "${1:-}" || _error_exit "${2:-Expected an integer}"
 }
 
 _is_float() {
-    [[ "$1" =~ $_FLOAT_REGEX ]]
+    [[ "${1:-}" =~ $_FLOAT_REGEX ]]
 }
 
 _require_float() {
-    _is_float "$1" || _error_exit "${2:-"expected a float"}"
+    _is_float "${1:-}" || _error_exit "${2:-Expected a float}"
 }
 
 _string_contains() {
-    local output="${1:-}"
-    local search_term="${2:-}"
-    [[ "$output" =~ .*"$search_term".* ]]
+    local string="${1:-}"
+    local pattern="${2:-}"
+
+    [[ -z "$string" ]] && _error_exit "String is empty"
+    [[ -z "$pattern" ]] && _error_exit "Pattern is empty"
+    [[ "$string" =~ .*"$pattern".* ]]
+}
+
+_validate_arg() {
+    [[ -z "${1:-}" ]] && _error_exit "${2:-Invalid argument}"
+    echo "$1"
 }

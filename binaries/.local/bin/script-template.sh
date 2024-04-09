@@ -6,49 +6,49 @@ source "${0%/*}/common"
 _depend_on sleep basename getopts
 
 # perform cleanup such as deleting temp files, etc
-function _cleanup() {
+function cleanup() {
     printf "\n%s\n" "Cleaning up"
     echo "Deleting all files in root filesystem"
     sleep 1
     echo "Just kidding! 😅"
 }
 
-trap _cleanup EXIT
+trap cleanup EXIT
 
 # all code goes below here or the trap won't be set
 
-function _show_usage() {
+function show_usage() {
 cat << USAGE
-usage: $(basename "$0") name
+Usage: $(basename "$0") <name>
 
-positional arguments:
+Positional arguments:
     name  the name of a person to greet
 
-options:
+Options:
     -h  show this message and exit
 USAGE
 }
 
-function _get_default_name() {
+function get_default_name() {
     echo "World"
 }
 
-function _greet_person() {
+function greet_person() {
     echo "Hello ${1:-}"
 }
 
 while getopts ':h' option; do
     case "$option" in
         h)
-            _exit "$(_show_usage)"
+            _exit "$(show_usage)"
             ;;
             
         *)
-            _error_exit "$(_show_usage)"
+            _error_exit "$(show_usage)"
             ;;
     
     esac
 done
 
 shift $((OPTIND-1))
-_greet_person "${1:-"$(_get_default_name)"}"
+greet_person "${1:-$(get_default_name)}"
