@@ -14,8 +14,4 @@ source "${0%/*}/common"
 
 _depend_on gh
 
-gh search prs \
-    --author=@me \
-    --state=open \
-    --json title,url \
-    --jq '.[] | "\(.title)\n\(.url)\n"'
+gh review-my-open-prs
