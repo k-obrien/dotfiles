@@ -39,7 +39,7 @@ fish -Pc "$(curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/mai
 mkdir -p ~/{.config/{git,zsh},.dotfiles,.local/bin}
 rm ~/.config/fish/config.fish ~/.config/fish/fish_plugins &> /dev/null || true
 cd ~/.dotfiles
-stow binaries codium fish fzffdignore git hammerspoon iterm2 zsh
+stow binaries codium fish fzffdignore git github-cli hammerspoon iterm2 zsh
 cd ~/
 
 echo -e "\nInstalling fish plugins..."
