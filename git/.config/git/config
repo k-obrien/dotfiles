@@ -91,16 +91,20 @@
     ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
     difflog = log -u
     staged = diff --staged
+    sw = switch
     co = checkout
     nb = "! [ $# -gt 0 ] && git fetch origin "${2:-$(basename "$(git default-branch)")}":"$1" && git checkout "$1" #"
     aa = add -A
     ci = commit -m
     ca = ! git aa && git ci
-    ac = "! git commit --amend "${1:---no-edit}" #"
-    aca = ! git aa && git ac
+    ac = commit --amend --no-edit
+    am = commit --amend -m
+    aac = ! git aa && git ac
+    aam = ! git aa && git am
     pushf = push --force-with-lease
     uncommit = reset HEAD~
     unstage = restore --staged
+    discard = restore --staged --worktree
     untrack = rm --cached
     skip = update-index --skip-worktree
     noskip = update-index --no-skip-worktree
