@@ -82,12 +82,15 @@ changePostureMenuBarItem = hs.menubar.new()
 changePostureIntervalInSeconds = hs.timer.minutes(30)
 changePostureTimer = nil
 
-local function resetChangePostureEffects()
+local function stopChangePostureTimer()
     if changePostureTimer then
         changePostureTimer:stop()
         changePostureTimer = nil
     end
+end
 
+local function resetChangePostureEffects()
+    stopChangePostureTimer()
     hs.notify.withdrawAll()
     hs.notify.withdrawAllScheduled()
     hs.screen.setInvertedPolarity(false)
@@ -105,7 +108,13 @@ local function onChangePostureMenuBarItemClick()
             withdrawAfter = 0
         }
     ):schedule(os.time() + changePostureIntervalInSeconds)
-    changePostureTimer = hs.timer.doAfter(changePostureIntervalInSeconds, function() hs.screen.setInvertedPolarity(true) end)
+    changePostureTimer = hs.timer.doAfter(
+        changePostureIntervalInSeconds,
+        function()
+            stopChangePostureTimer()
+            hs.screen.setInvertedPolarity(true)
+        end
+    )
 end
 
 if changePostureMenuBarItem then
