@@ -36,7 +36,7 @@ brew bundle install --file ~/.dotfiles/brewfile
 echo
 fish -Pc "$(curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish) | source && fisher install jorgebucaran/fisher"
 
-mkdir -p ~/{.config/{git,zsh},.dotfiles,.local/bin}
+mkdir -p ~/{.config/{gh,git,iterm2,zsh},.dotfiles,.local/bin,Library/Application\ Support/VSCodium/User}
 rm ~/.config/fish/config.fish ~/.config/fish/fish_plugins &> /dev/null || true
 cd ~/.dotfiles
 stow binaries codium fish fzffdignore git github-cli hammerspoon iterm2 zsh
