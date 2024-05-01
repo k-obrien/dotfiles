@@ -17,7 +17,7 @@
 	<key>Default Bookmark Guid</key>
 	<string>F044CC22-6F1A-47F9-8861-C2C52A50BAB8</string>
 	<key>DoubleClickPerformsSmartSelection</key>
-	<false/>
+	<true/>
 	<key>FocusFollowsMouse</key>
 	<true/>
 	<key>HapticFeedbackForEsc</key>
