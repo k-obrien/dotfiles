@@ -29,6 +29,10 @@ export HOMEBREW_REPOSITORY="/opt/homebrew";
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
 brew analytics off
 
+echo -e "\nUpdating man path to include Homebrew man pages..."
+sudo mkdir -p /usr/local/etc/man.d
+echo -e "MANPATH /opt/homebrew/share/man\nMANPATH /opt/homebrew/Cellar/*/*/share/man" | sudo tee -a /usr/local/etc/man.d/homebrew.man.conf
+
 echo -e "\nInstalling apps..."
 git clone --recurse-submodules https://github.com/k-obrien/dotfiles.git ~/.dotfiles
 brew bundle install --file ~/.dotfiles/brewfile
