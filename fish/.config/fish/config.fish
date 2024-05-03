@@ -48,7 +48,6 @@ if status is-interactive
     type -q dust && abbr -a du dust
     type -q procs && abbr -a ps procs
     type -q rg && abbr -a grep "rg -e"
-    type -q xman && abbr -a man xman
 
     if type -q codium
         abbr -a edit codium
