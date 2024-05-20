@@ -46,12 +46,11 @@ local function applyWindowLayout()
     hs.layout.apply(numberOfScreens == 1 and singleScreenLayout or dualScreenLayout)
 end
 
-screenWatcher = hs.screen.watcher.new(applyWindowLayout)
 hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
 -- <<<
 
 -- >>> Toggle mute on Slack and Teams
-local function toggleMute() 
+local function toggleChatMicMute() 
     local modifier = {"cmd", "shift"}
     local teams = hs.application.get("com.microsoft.teams2")
     if teams then hs.eventtap.keyStroke(modifier, "m", 0, teams) end
@@ -59,22 +58,8 @@ local function toggleMute()
     if slack then hs.eventtap.keyStroke(modifier, "space", 0, slack) end
 end
 
-hs.hotkey.bind(modifier, "a", "Toggle Mute", toggleMute)
+hs.hotkey.bind(modifier, "a", "Toggle Chat Microphone Mute", toggleChatMicMute)
 -- <<<
-
--- Call functions on system state changes
--- Requires StateActor Spoon
-if hs.spoons.isInstalled("StateActor") then
-    hs.loadSpoon("StateActor")
-    local actionsForStates = { applyWindowLayout }
-    spoon.StateActor:bindActions({
-        sessionDidBecomeActive = actionsForStates,
-        screensDidUnlock = actionsForStates,
-        screensDidWake = actionsForStates,
-        systemDidWake = actionsForStates
-    })
-    spoon.StateActor:start()
-end
 
 -- >>> Sit/Stand menu item and notification
 sitting = true
@@ -121,6 +106,8 @@ if changePostureMenuBarItem then
     changePostureMenuBarItem:setClickCallback(onChangePostureMenuBarItemClick)
     onChangePostureMenuBarItemClick()
 end
+
+hs.hotkey.bind(modifier, "s", "Toggle posture", onChangePostureMenuBarItemClick)
 -- <<<
 
 -- >>> Show Phonetic Alphabet
@@ -129,8 +116,26 @@ local function showPhoneticAlphabet()
     hs.alert.show(alphabet, { atScreenEdge = 0 }, "infinite")
 end
 
-hs.hotkey.bind(modifier, "p", "Phonetic Alphabet", showPhoneticAlphabet, hs.alert.closeAll)
+hs.hotkey.bind(modifier, "p", "Phonetic Alphabet", showPhoneticAlphabet)
 -- <<<
 
--- Defeat paste-blocking
+-- >>> Defeat paste-blocking
 hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+-- <<<
+
+-- >>> Call functions on system state changes
+screenWatcher = hs.screen.watcher.new(applyWindowLayout)
+
+-- Requires StateActor Spoon
+if hs.spoons.isInstalled("StateActor") then
+    hs.loadSpoon("StateActor")
+    local actionsForStates = { applyWindowLayout }
+    spoon.StateActor:bindActions({
+        sessionDidBecomeActive = actionsForStates,
+        screensDidUnlock = actionsForStates,
+        screensDidWake = actionsForStates,
+        systemDidWake = actionsForStates
+    })
+    spoon.StateActor:start()
+end
+-- <<<
