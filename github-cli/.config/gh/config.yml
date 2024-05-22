@@ -10,8 +10,8 @@ prompt: enabled
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: pr checkout
     review-open-prs: search prs --repo "$1" --state=open --limit=10 --draft=false --checks=success --json createdAt,commentsCount,title,url --jq '.[].createdAt |= sub("T.+Z"; "") | sort_by(.createdAt, .commentsCount) | .[0:9][] | "\(.title)\n\(.url)\n"'
+    review-open-involved-prs: search prs --repo "$1" --involves=@me --state=open --json title,url --jq '.[] | "\(.title)\n\(.url)\n"'
     review-my-open-prs: search prs --author=@me --state=open --json title,url --jq '.[] | "\(.title)\n\(.url)\n"'
     raise-pr: pr create --draft --title "$1" --template "$2" --reviewer "$3"
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
