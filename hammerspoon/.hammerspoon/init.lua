@@ -61,53 +61,53 @@ end
 hs.hotkey.bind(modifier, "a", "Toggle Chat Microphone Mute", toggleChatMicMute)
 -- <<<
 
--- >>> Sit/Stand menu item and notification
-sitting = true
-changePostureMenuBarItem = hs.menubar.new()
-changePostureIntervalInSeconds = hs.timer.minutes(30)
-changePostureTimer = nil
+-- >>> Sit/Stand Reminder
+sitStandTimer = nil
 
-local function stopChangePostureTimer()
-    if changePostureTimer then
-        changePostureTimer:stop()
-        changePostureTimer = nil
+local function stopSitStandTimer()
+    if sitStandTimer then
+        sitStandTimer:stop()
+        sitStandTimer = nil
     end
 end
 
-local function resetChangePostureEffects()
-    stopChangePostureTimer()
-    hs.notify.withdrawAll()
-    hs.notify.withdrawAllScheduled()
+function resetSitStandScreenEffects()
+    -- sometimes reverting the screen polarity doesn't work
+    -- but re-inverting first mitigates the issue 
+    if hs.screen.getInvertedPolarity() then hs.screen.setInvertedPolarity(true) end
     hs.screen.setInvertedPolarity(false)
 end
 
-local function onChangePostureMenuBarItemClick()
-    sitting = not sitting
-    changePostureMenuBarItem:setTitle(sitting and "—" or "⏐")
-    resetChangePostureEffects()
-    hs.notify.new(
-        resetChangePostureEffects,
-        { 
-            title = "Change Posture", 
-            informativeText = sitting and "Stand up" or "Sit down", 
-            withdrawAfter = 0
-        }
-    ):schedule(os.time() + changePostureIntervalInSeconds)
-    changePostureTimer = hs.timer.doAfter(
-        changePostureIntervalInSeconds,
+sitStandMenuBarItem = nil
+
+local function stopSitStandReminder()
+    stopSitStandTimer()
+    resetSitStandScreenEffects()
+    sitStandMenuBarItem:delete()
+    sitStandMenuBarItem = nil
+end
+
+sitStandIntervalInSeconds = hs.timer.minutes(30)
+
+local function startSitStandReminder()
+    stopSitStandTimer()
+    resetSitStandScreenEffects()
+    sitStandTimer = hs.timer.doAfter(
+        sitStandIntervalInSeconds,
         function()
-            stopChangePostureTimer()
+            stopSitStandTimer()
             hs.screen.setInvertedPolarity(true)
         end
     )
+
+    if not sitStandMenuBarItem then
+        sitStandMenuBarItem = hs.menubar.new()
+        sitStandMenuBarItem:setTitle("⇅")
+        sitStandMenuBarItem:setClickCallback(stopSitStandReminder)
+    end
 end
 
-if changePostureMenuBarItem then
-    changePostureMenuBarItem:setClickCallback(onChangePostureMenuBarItemClick)
-    onChangePostureMenuBarItemClick()
-end
-
-hs.hotkey.bind(modifier, "s", "Toggle posture", onChangePostureMenuBarItemClick)
+hs.hotkey.bind(modifier, "s", startSitStandReminder)
 -- <<<
 
 -- >>> Show Phonetic Alphabet
