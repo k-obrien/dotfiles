@@ -156,3 +156,11 @@ if loadSpoon("StateActor") then
     spoon.StateActor:start()
 end
 -- <<<
+
+-- >>> Move mouse cursor to centre of focused window
+if loadSpoon("MouseFollowsFocus") then
+    spoon.MouseFollowsFocus:start()
+end
+-- <<<
+
+
