@@ -11,10 +11,19 @@ hs.alert.defaultStyle.textSize = 24
 hs.alert.defaultStyle.strokeColor = { white = 0, alpha = 0 }
 hs.hotkey.alertDuration = 0
 
+local function loadSpoon(spoon)
+    local spoonIsInstalled = hs.spoons.isInstalled(spoon)
+
+    if hs.spoons.isInstalled(spoon) then
+        hs.loadSpoon(spoon)
+    end
+
+    return spoonIsInstalled
+end
+
 -- Enable auto-reload on configuration change
 -- Requires ReloadConfiguration Spoon
-if hs.spoons.isInstalled("ReloadConfiguration") then
-    hs.loadSpoon("ReloadConfiguration")
+if loadSpoon("ReloadConfiguration") then
     spoon.ReloadConfiguration:start()
 end
 
@@ -136,8 +145,7 @@ hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap
 screenWatcher = hs.screen.watcher.new(applyWindowLayout)
 
 -- Requires StateActor Spoon
-if hs.spoons.isInstalled("StateActor") then
-    hs.loadSpoon("StateActor")
+if loadSpoon("StateActor") then
     local actionsForStates = { applyWindowLayout }
     spoon.StateActor:bindActions({
         sessionDidBecomeActive = actionsForStates,
