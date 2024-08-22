@@ -88,7 +88,7 @@
     clone-submodules = submodule update --init --recursive
     st = status -s
     last = log -1 HEAD
-    ls = log --pretty=format:'%Cred%h%Creset - %s - %Cblue%an%Creset (%Cgreen%ch%Creset)'
+    ls = log --date=format:'%m/%d/%Y %H:%M' --pretty=format:'%C(red)%h%C(reset) %C(green)%cd%C(reset) %<(20,mtrunc)%C(blue)%an%C(reset) %s'
     difflog = log -u
     staged = diff --staged
     sw = switch
