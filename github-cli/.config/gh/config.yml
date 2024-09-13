@@ -9,11 +9,46 @@ prompt: enabled
 # A pager program to send command output to, e.g. "less". If blank, will refer to environment. Set the value to "cat" to disable the pager.
 pager:
 # Aliases allow you to create nicknames for gh commands
+# Add aliases to complex commands by placing the command in a text file (e.g. command.txt) without the `gh` prefix and run the following command:
+# cat command.txt | gh alias set <alias name> -
 aliases:
-    review-open-prs: search prs --repo "$1" --state=open --limit=10 --draft=false --checks=success --json createdAt,commentsCount,title,url --jq '.[].createdAt |= sub("T.+Z"; "") | sort_by(.createdAt, .commentsCount) | .[0:9][] | "\(.title)\n\(.url)\n"'
-    review-open-involved-prs: search prs --repo "$1" --involves=@me --state=open --json title,url --jq '.[] | "\(.title)\n\(.url)\n"'
-    review-my-open-prs: search prs --author=@me --state=open --json title,url --jq '.[] | "\(.title)\n\(.url)\n"'
     raise-pr: pr create --draft --title "$1" --template "$2" --reviewer "$3"
+    review-my-open-prs: search prs --author=@me --state=open --json title,url --jq '.[] | "\(.title)\n\(.url)\n"'
+    review-open-involved-prs: search prs --repo "$1" --involves=@me --state=open --json title,url --jq '.[] | "\(.title)\n\(.url)\n"'
+    review-open-prs: |
+        api graphql
+            -F search_query="repo:$1/$2 is:pr is:open draft:false -is:queued -author:@me -reviewed-by:@me"
+            -f query='
+                query($search_query: String!) {
+                    search(
+                        query: $search_query
+                        first: 10
+                        type: ISSUE
+                    ) {
+                        nodes {
+                            ... on PullRequest {
+                                statusCheckRollup {
+                                    state
+                                }
+                                createdAt
+                                latestReviews(first: 10) {
+                                    totalCount
+                                }
+                                title
+                                url
+                            }
+                        }
+                    }
+                }
+            '
+            --jq '
+                .data.search.nodes | 
+                sort_by(.statusCheckRollup.state, .createdAt) | 
+                reverse |
+                sort_by(.latestReviews.totalCount) | 
+                .[] | 
+                "\(if .statusCheckRollup.state == "SUCCESS" then "✅" else "❌" end) \(.title) [\(.latestReviews.totalCount)]\n\(.url)\n"
+            '
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
