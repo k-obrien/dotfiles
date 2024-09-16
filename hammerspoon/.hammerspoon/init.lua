@@ -76,7 +76,7 @@ local function showPhoneticAlphabet()
     hs.alert.show(alphabet, { atScreenEdge = 0 }, "infinite")
 end
 
-hs.hotkey.bind(modifier, "p", "Phonetic Alphabet", showPhoneticAlphabet)
+hs.hotkey.bind(modifier, "p", "Phonetic Alphabet", showPhoneticAlphabet, hs.alert.closeAll)
 -- <<<
 
 -- >>> Defeat paste-blocking
