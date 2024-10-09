@@ -32,7 +32,7 @@ modifier = { "ctrl", "cmd", "alt", "shift" }
 
 -- >>> Apply a predefined window layout
 local function applyWindowLayout()
-    local externalScreen = "LG HDR WQHD+"
+    local externalScreen = "LG ULTRAWIDE"
     local internalScreen = "Built-in Retina Display"
     local numberOfScreens = #hs.screen.allScreens()
 
