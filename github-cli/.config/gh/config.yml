@@ -13,11 +13,12 @@ pager:
 # cat command.txt | gh alias set <alias name> -
 aliases:
     raise-pr: pr create --draft --title "$1" --template "$2" --reviewer "$3"
-    review-my-open-prs: search prs --author=@me --state=open --json title,url --jq '.[] | "\(.title)\n\(.url)\n"'
-    review-open-involved-prs: search prs --repo "$1" --involves=@me --state=open --json title,url --jq '.[] | "\(.title)\n\(.url)\n"'
-    review-open-prs: |
+    my-prs: search prs --author=@me --state=open --json title,url --jq '.[] | "\u001b[97m\(.title)\u001b[0m\n\u001b[34m\(.url)\u001b[0m\n"'
+    reviewed-prs:  '!gh review-prs "repo:$1 is:pr is:open draft:false -author:@me reviewed-by:@me"'
+    unreviewed-prs: '!gh review-prs "repo:$1 is:pr is:open draft:false -author:@me -reviewed-by:@me"'
+    review-prs: |
         api graphql
-            -F search_query="repo:$1/$2 is:pr is:open draft:false -is:queued -author:@me -reviewed-by:@me"
+            -F search_query="$1"
             -f query='
                 query($search_query: String!) {
                     search(
@@ -32,6 +33,10 @@ aliases:
                                 }
                                 createdAt
                                 latestReviews(first: 10) {
+                                    nodes {
+                                        state
+                                        viewerDidAuthor
+                                    }
                                     totalCount
                                 }
                                 title
@@ -43,11 +48,9 @@ aliases:
             '
             --jq '
                 .data.search.nodes | 
-                sort_by(.statusCheckRollup.state, .createdAt) | 
-                reverse |
-                sort_by(.latestReviews.totalCount) | 
-                .[] | 
-                "\(if .statusCheckRollup.state == "SUCCESS" then "✅" else "❌" end) \(.title) [\(.latestReviews.totalCount)]\n\(.url)\n"
+                sort_by(.createdAt, .latestReviews.totalCount, .statusCheckRollup.state) | 
+                map(select(.latestReviews.nodes | any(.viewerDidAuthor == true and .state == "APPROVED") | not)) | .[] | 
+                "\(if .statusCheckRollup.state == "SUCCESS" then "🟢" else "🔴" end) \u001b[97m[\u001b[32m\(.latestReviews.totalCount)\u001b[97m] \(.title)\u001b[0m\n\u001b[34m\(.url)\u001b[0m\n"
             '
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
