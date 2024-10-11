@@ -2,7 +2,7 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Show Involved Pull Requests
+# @raycast.title Unreviewed Pull Requests
 # @raycast.mode fullOutput
 
 # Optional parameters:
@@ -15,4 +15,4 @@ source "${0%/*}/common"
 
 _depend_on gh
 
-gh review-open-involved-prs "${1:?repository required}"
+gh unreviewed-prs "${1:?repository required}"
