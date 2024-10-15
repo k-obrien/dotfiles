@@ -6,7 +6,7 @@ if status is-interactive
 
     set -gx ANDROID_HOME ~/Library/Android/sdk
 
-    fish_add_path -g ~/.local/bin {$HOMEBREW_PREFIX}/{bin,sbin} {$ANDROID_HOME}/platform-tools "/Applications/Android Studio.app/Contents/MacOS"
+    fish_add_path -g ~/.local/bin {$HOMEBREW_PREFIX}/{bin,sbin} {$ANDROID_HOME}/platform-tools
 
     set -gx JAVA_HOME (/usr/libexec/java_home -a arm64)
     set -gx STUDIO_JDK $JAVA_HOME
