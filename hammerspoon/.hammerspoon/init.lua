@@ -125,7 +125,7 @@ local function startSitStandReminder()
     end
 end
 
-hs.hotkey.bind(modifier, "s", startSitStandReminder)
+hs.hotkey.bind(modifier, "d", startSitStandReminder)
 -- <<<
 
 -- >>> Show Phonetic Alphabet
