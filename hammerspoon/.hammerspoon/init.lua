@@ -80,19 +80,14 @@ local function stopSitStandTimer()
     end
 end
 
-screenPolarityInverted = false
-screenPolarityInvertedTimer = hs.timer.doWhile(
-    function() return screenPolarityInverted end, 
-    function() hs.screen.setInvertedPolarity(screenPolarityInverted) end
-)
+frame = nil
 
 function resetSitStandScreenEffects()
-    screenPolarityInverted = false
-    screenPolarityInvertedTimer:stop()
-    -- sometimes reverting the screen polarity doesn't work
-    -- but re-inverting first mitigates the issue 
-    hs.screen.setInvertedPolarity(hs.screen.getInvertedPolarity())
-    hs.screen.setInvertedPolarity(screenPolarityInverted)
+    if frame then
+        frame:hide(0.5)
+        frame:delete()
+        frame = nil
+    end
 end
 
 sitStandMenuBarItem = nil
@@ -107,14 +102,18 @@ end
 sitStandIntervalInSeconds = hs.timer.minutes(30)
 
 local function startSitStandReminder()
-    stopSitStandTimer()
     resetSitStandScreenEffects()
+    frame = hs.drawing.rectangle(hs.screen.primaryScreen():fullFrame())
+    frame:setFillColor({ ["red"] = 0, ["blue"] = 0, ["green"] = 1, ["alpha"] = 0.3 })
+    frame:setFill(true)
+    frame:bringToFront(true)
+
+    stopSitStandTimer()
     sitStandTimer = hs.timer.doAfter(
         sitStandIntervalInSeconds,
         function()
             stopSitStandTimer()
-            screenPolarityInverted = true
-            screenPolarityInvertedTimer:start()
+            frame:show(0.5)
         end
     )
 
