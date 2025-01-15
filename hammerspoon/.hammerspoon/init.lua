@@ -36,17 +36,18 @@ local function applyWindowLayout()
     local internalScreen = "Built-in Retina Display"
     local numberOfScreens = #hs.screen.allScreens()
 
-    local firefoxPos = hs.application.get("Android Studio") and { x = 0, y = 0, w = 0.35, h = 1 } or { x = 0.25, y = 0, w = 0.5, h = 1 }
+    local browserPos = hs.application.get("Android Studio") and { x = 0, y = 0, w = 0.35, h = 1 } or { x = 0.25, y = 0, w = 0.5, h = 1 }
     
     local dualScreenLayout = {
-        { "Firefox", nil, externalScreen, firefoxPos, nil, nil },
+        { "Firefox", nil, externalScreen, browserPos, nil, nil },
+        { "Chrome", nil, externalScreen, browserPos, nil, nil },
         { "Android Studio", nil, externalScreen, { x = 0.35, y = 0, w = 0.65, h = 1 }, nil, nil },
         { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil },
         { "Outlook", nil, internalScreen, hs.layout.maximized, nil, nil }
     }
     
     local singleScreenLayout = {
-        { "Firefox", nil, internalScreen, hs.layout.maximized, nil, nil },
+        { "Safari", nil, internalScreen, hs.layout.maximized, nil, nil },
         { "Android Studio", nil, internalScreen, hs.layout.maximized, nil, nil },
         { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil },
         { "Outlook", nil, internalScreen, hs.layout.maximized, nil, nil }
