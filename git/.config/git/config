@@ -112,7 +112,7 @@
     sls = stash list
     spop = stash pop
     sshow = stash show -p
-    default-branch = symbolic-ref refs/remotes/origin/HEAD --short 
+    default-branch = symbolic-ref refs/remotes/origin/HEAD --short
     branches = for-each-ref refs/heads --sort=committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:human)%(color:reset))'
     merged = "! _base_branch=${2:-$(git default-branch)}; git fetch -q && git branch --merged "$_base_branch" | grep -v "$_base_branch" | grep -v '^[*+]' #"
     cull = ! git merged | xargs git branch -d
