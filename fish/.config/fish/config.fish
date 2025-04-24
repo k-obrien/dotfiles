@@ -56,8 +56,8 @@ if status is-interactive
     end
 
     if type -q fd
-        abbr -a find fd
-        abbr -a find! fd --no-ignore --hidden
+        abbr -a find fd --full-path
+        abbr -a find! fd --no-ignore --hidden --full-path
     end
 
     if type -q eza
