@@ -32,28 +32,24 @@ modifier = { "ctrl", "cmd", "alt", "shift" }
 
 -- >>> Apply a predefined window layout
 local function applyWindowLayout()
-    local externalScreen = "LG ULTRAWIDE"
     local internalScreen = "Built-in Retina Display"
-    local numberOfScreens = #hs.screen.allScreens()
+    local primaryScreen = hs.screen.primaryScreen():name()
 
     local browserPos = hs.application.get("Android Studio") and { x = 0, y = 0, w = 0.35, h = 1 } or { x = 0.25, y = 0, w = 0.5, h = 1 }
     
-    local dualScreenLayout = {
-        { "Firefox", nil, externalScreen, browserPos, nil, nil },
-        { "Chrome", nil, externalScreen, browserPos, nil, nil },
-        { "Android Studio", nil, externalScreen, { x = 0.35, y = 0, w = 0.65, h = 1 }, nil, nil },
-        { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil },
-        { "Outlook", nil, internalScreen, hs.layout.maximized, nil, nil }
+    local notebookLayout = {
+        { "Firefox", nil, primaryScreen, hs.layout.maximized, nil, nil },
+        { "Chrome", nil, primaryScreen, hs.layout.maximized, nil, nil },
+        { "Android Studio", nil, primaryScreen, hs.layout.maximized, nil, nil }
     }
     
-    local singleScreenLayout = {
-        { "Safari", nil, internalScreen, hs.layout.maximized, nil, nil },
-        { "Android Studio", nil, internalScreen, hs.layout.maximized, nil, nil },
-        { "Slack", nil, internalScreen, hs.layout.maximized, nil, nil },
-        { "Outlook", nil, internalScreen, hs.layout.maximized, nil, nil }
+    local desktopLayout = {
+        { "Firefox", nil, primaryScreen, browserPos, nil, nil },
+        { "Chrome", nil, primaryScreen, browserPos, nil, nil },
+        { "Android Studio", nil, primaryScreen, { x = 0.35, y = 0, w = 0.65, h = 1 }, nil, nil }
     }
     
-    hs.layout.apply(numberOfScreens == 1 and singleScreenLayout or dualScreenLayout)
+    hs.layout.apply(primaryScreen == internalScreen and notebookLayout or desktopLayout)
 end
 
 hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
