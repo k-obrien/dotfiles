@@ -33,9 +33,12 @@ echo -e "\nUpdating man path to include Homebrew man pages..."
 sudo mkdir -p /usr/local/etc/man.d
 echo -e "MANPATH /opt/homebrew/share/man\nMANPATH /opt/homebrew/Cellar/*/*/share/man" | sudo tee -a /usr/local/etc/man.d/homebrew.man.conf
 
-echo -e "\nInstalling apps..."
+echo -e "\nInstalling apps with Homebrew..."
 git clone --recurse-submodules https://github.com/k-obrien/dotfiles.git ~/.dotfiles
 brew bundle install --file ~/.dotfiles/brewfile
+
+echo -e "\nEnabling Homebrew autoupgrade..."
+brew autoupdate start --upgrade --cleanup --leaves-only
 
 echo
 fish -Pc "$(curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish) | source && fisher install jorgebucaran/fisher"
