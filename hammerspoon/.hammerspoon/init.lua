@@ -158,7 +158,3 @@ if loadSpoon("MouseFollowsFocus") then
     spoon.MouseFollowsFocus:start()
 end
 -- <<<
-
-if loadSpoon("MouseCircle") then
-    spoon.MouseCircle:bindHotkeys({ show = { modifier, "q" } })
-end
