@@ -55,18 +55,6 @@ end
 hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
 -- <<<
 
--- >>> Toggle mute on Slack and Teams
-local function toggleChatMicMute() 
-    local modifier = {"cmd", "shift"}
-    local teams = hs.application.get("com.microsoft.teams2")
-    if teams then hs.eventtap.keyStroke(modifier, "m", 0, teams) end
-    local slack = hs.application.get("com.tinyspeck.slackmacgap")
-    if slack then hs.eventtap.keyStroke(modifier, "space", 0, slack) end
-end
-
-hs.hotkey.bind(modifier, "a", "Toggle Chat Microphone Mute", toggleChatMicMute)
--- <<<
-
 -- >>> Sit/Stand Reminder
 sitStandTimer = nil
 
