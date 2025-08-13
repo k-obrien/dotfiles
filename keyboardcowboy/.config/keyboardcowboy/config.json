@@ -38,7 +38,6 @@
             "trigger" : {
               "keyboardShortcuts" : {
                 "allowRepeat" : false,
-                "keepLastPartialMatch" : true,
                 "shortcuts" : [
                   {
                     "id" : "CE077C70-1C5D-4ACA-9989-38D41807C5E9",
@@ -98,6 +97,25 @@
           {
             "commands" : [
               {
+                "bundledCommand" : {
+                  "kind" : {
+                    "appFocus" : {
+                      "command" : {
+                        "bundleIdentifer" : "com.microsoft.teams2",
+                        "createNewWindow" : false,
+                        "hideOtherApps" : false,
+                        "id" : "05BF3E48-6C1E-4EAA-9802-0DBE61B2F3DA"
+                      }
+                    }
+                  },
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "84B60A44-48D6-45F7-9138-A06DA3181213",
+                    "name" : ""
+                  }
+                }
+              },
+              {
                 "applicationCommand" : {
                   "action" : "open",
                   "application" : {
@@ -110,7 +128,10 @@
                     "enabled" : true,
                     "id" : "C786B91A-4B9A-4C6E-B30D-8A71DC4D4799",
                     "name" : "Open Microsoft Teams"
-                  }
+                  },
+                  "modifiers" : [
+                    "onlyIfNotRunning"
+                  ]
                 }
               }
             ],
@@ -120,7 +141,6 @@
             "trigger" : {
               "keyboardShortcuts" : {
                 "allowRepeat" : false,
-                "keepLastPartialMatch" : true,
                 "shortcuts" : [
                   {
                     "id" : "EBCC38DF-A3AD-4AB0-B284-2851CD25096D",
@@ -165,7 +185,6 @@
             "trigger" : {
               "keyboardShortcuts" : {
                 "allowRepeat" : false,
-                "keepLastPartialMatch" : true,
                 "shortcuts" : [
                   {
                     "id" : "2343A4B6-7DD5-4021-901B-B043E2D8C2FF",
@@ -210,7 +229,6 @@
             "trigger" : {
               "keyboardShortcuts" : {
                 "allowRepeat" : false,
-                "keepLastPartialMatch" : true,
                 "shortcuts" : [
                   {
                     "id" : "F75780FF-0A50-4EA3-AD28-49FDB51E7374",
@@ -255,7 +273,6 @@
             "trigger" : {
               "keyboardShortcuts" : {
                 "allowRepeat" : false,
-                "keepLastPartialMatch" : true,
                 "shortcuts" : [
                   {
                     "id" : "297D7EE3-0CFC-448F-8ACD-31AC7B5908BD",
@@ -300,7 +317,6 @@
             "trigger" : {
               "keyboardShortcuts" : {
                 "allowRepeat" : false,
-                "keepLastPartialMatch" : true,
                 "shortcuts" : [
                   {
                     "id" : "B0D358E4-2D09-41A8-960A-31BECD2D14DB",
@@ -310,8 +326,8 @@
                     ]
                   },
                   {
-                    "id" : "E9B2223E-B048-48F9-BD55-1EEC45B50982",
-                    "key" : "s",
+                    "id" : "86631177-7733-4929-8A6A-54350C0E87EE",
+                    "key" : "a",
                     "modifiers" : [
                       "~"
                     ]
@@ -345,7 +361,6 @@
             "trigger" : {
               "keyboardShortcuts" : {
                 "allowRepeat" : false,
-                "keepLastPartialMatch" : true,
                 "shortcuts" : [
                   {
                     "id" : "75563369-888C-45A8-B18F-6B04B4FB3EFA",
@@ -478,117 +493,6 @@
         "id" : "FE700BAC-FD41-4B46-A4BF-DC7186B71509",
         "name" : "System",
         "symbol" : "laptopcomputer"
-      },
-      {
-        "color" : "#98989D",
-        "disabled" : true,
-        "id" : "2030B170-10CC-493E-898B-434C876C922B",
-        "name" : "Websites",
-        "symbol" : "safari",
-        "workflows" : [
-          {
-            "commands" : [
-              {
-                "openCommand" : {
-                  "meta" : {
-                    "enabled" : true,
-                    "id" : "D7C0E503-5257-4185-AA39-D4022CE0B196",
-                    "name" : ""
-                  },
-                  "path" : "https:\/\/www.apple.com"
-                }
-              }
-            ],
-            "execution" : "concurrent",
-            "id" : "D78AF44F-CB78-4357-81F4-9F57F404FF84",
-            "name" : "Open apple.com",
-            "trigger" : {
-              "keyboardShortcuts" : {
-                "shortcuts" : [
-                  {
-                    "id" : "1EC80BA1-91A3-4151-84B7-5AE0223B1A68",
-                    "key" : "⇥",
-                    "modifiers" : [
-                      "fn"
-                    ]
-                  },
-                  {
-                    "id" : "9976ACDA-181A-4CA3-A02A-D3EE593B961C",
-                    "key" : "A"
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "commands" : [
-              {
-                "openCommand" : {
-                  "meta" : {
-                    "enabled" : true,
-                    "id" : "3B414424-5CE6-4331-AE02-D478B467709F",
-                    "name" : ""
-                  },
-                  "path" : "https:\/\/www.github.com"
-                }
-              }
-            ],
-            "execution" : "concurrent",
-            "id" : "3FB46CCC-FC66-403E-886C-48906A22E387",
-            "name" : "Open github.com",
-            "trigger" : {
-              "keyboardShortcuts" : {
-                "shortcuts" : [
-                  {
-                    "id" : "CB091FFD-8A2A-4644-9690-2CF89A987F14",
-                    "key" : "⇥",
-                    "modifiers" : [
-                      "fn"
-                    ]
-                  },
-                  {
-                    "id" : "5FAF2423-74C1-4B1F-B9D5-B08931B4E26A",
-                    "key" : "G"
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "commands" : [
-              {
-                "openCommand" : {
-                  "meta" : {
-                    "enabled" : true,
-                    "id" : "E742173C-D538-4F90-9511-9D842CCAEE3F",
-                    "name" : ""
-                  },
-                  "path" : "https:\/\/www.imdb.com"
-                }
-              }
-            ],
-            "execution" : "concurrent",
-            "id" : "52B1A7DC-EC09-4D8F-A40C-A258FF424465",
-            "name" : "Open imdb.com",
-            "trigger" : {
-              "keyboardShortcuts" : {
-                "shortcuts" : [
-                  {
-                    "id" : "98DAD8EE-2B19-4063-A7F1-D84F4A1265B9",
-                    "key" : "⇥",
-                    "modifiers" : [
-                      "fn"
-                    ]
-                  },
-                  {
-                    "id" : "DFEA00C9-3E55-408A-B654-A51E37AEFF99",
-                    "key" : "I"
-                  }
-                ]
-              }
-            }
-          }
-        ]
       },
       {
         "color" : "#000",
@@ -980,6 +884,72 @@
                 ]
               }
             }
+          },
+          {
+            "commands" : [
+              {
+                "keyboardCommand" : {
+                  "kind" : {
+                    "key" : {
+                      "command" : {
+                        "iterations" : 1,
+                        "keyboardShortcuts" : [
+                          {
+                            "id" : "F6116FD7-DDAE-4446-866A-7C21EFA4BFE7",
+                            "key" : "a",
+                            "modifiers" : [
+                              "$",
+                              "@"
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "ECBE2962-1FAA-4A35-9C85-445CD2533831",
+                    "name" : ""
+                  }
+                }
+              },
+              {
+                "bundledCommand" : {
+                  "kind" : {
+                    "appFocus" : {
+                      "command" : {
+                        "bundleIdentifer" : "",
+                        "createNewWindow" : true,
+                        "hideOtherApps" : false,
+                        "id" : "294BFD41-047F-47E5-84F2-0A43D412A130"
+                      }
+                    }
+                  },
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "D1234F95-CEBF-4C0B-AEDA-8A675E6B4478",
+                    "name" : ""
+                  }
+                }
+              }
+            ],
+            "execution" : "serial",
+            "id" : "83795E3A-BB03-45A0-8DF4-8172AE903C9B",
+            "name" : "Applications",
+            "trigger" : {
+              "keyboardShortcuts" : {
+                "allowRepeat" : false,
+                "shortcuts" : [
+                  {
+                    "id" : "F0D73844-C59F-4239-9C67-F50A371C66A5",
+                    "key" : "p",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  }
+                ]
+              }
+            }
           }
         ]
       },
@@ -1081,6 +1051,105 @@
                     "key" : "m",
                     "modifiers" : [
                       "~"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "color" : "#000",
+        "id" : "79D453B7-438D-4106-873B-11691E0532FC",
+        "name" : "Microsoft Outlook",
+        "rule" : {
+          "bundleIdentifiers" : [
+            "com.microsoft.Outlook"
+          ],
+          "id" : "F51682E5-7B35-4AAD-BFEB-43E1123D1164"
+        },
+        "symbol" : "folder",
+        "workflows" : [
+          {
+            "commands" : [
+              {
+                "keyboardCommand" : {
+                  "kind" : {
+                    "key" : {
+                      "command" : {
+                        "iterations" : 1,
+                        "keyboardShortcuts" : [
+                          {
+                            "id" : "065939F5-77A1-4170-A507-3C36979F4112",
+                            "key" : "↖"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "9532E3B6-152F-4803-89FD-A507BA193FC7",
+                    "name" : ""
+                  }
+                }
+              }
+            ],
+            "execution" : "serial",
+            "id" : "DC9A26C6-FBDB-4E18-B7E9-52836BCFFF54",
+            "name" : "^A moves cursor to line beginning",
+            "trigger" : {
+              "keyboardShortcuts" : {
+                "allowRepeat" : false,
+                "shortcuts" : [
+                  {
+                    "id" : "12270E76-920A-428B-B892-DFC7FA6CA93D",
+                    "key" : "a",
+                    "modifiers" : [
+                      "^"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "commands" : [
+              {
+                "keyboardCommand" : {
+                  "kind" : {
+                    "key" : {
+                      "command" : {
+                        "iterations" : 1,
+                        "keyboardShortcuts" : [
+                          {
+                            "id" : "6FA30046-0C39-491C-B212-F8DD50131B80",
+                            "key" : "↘"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "490A5CD9-E531-4796-B5A2-79D1829373C2",
+                    "name" : ""
+                  }
+                }
+              }
+            ],
+            "execution" : "serial",
+            "id" : "305FB353-AF44-4114-A9A4-69E48B5467B0",
+            "name" : "^E moves cursor to line end",
+            "trigger" : {
+              "keyboardShortcuts" : {
+                "shortcuts" : [
+                  {
+                    "id" : "F9F4A149-718A-4F45-991C-546F0FF78CC0",
+                    "key" : "e",
+                    "modifiers" : [
+                      "^"
                     ]
                   }
                 ]
