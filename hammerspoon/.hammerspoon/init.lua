@@ -65,21 +65,17 @@ local function stopSitStandTimer()
     end
 end
 
-frame = nil
-
-function resetSitStandScreenEffects()
-    if frame then
-        frame:hide(0.5)
-        frame:delete()
-        frame = nil
+local function setScreenPolarity(invertScreenColours)
+    while invertScreenColours ~= hs.screen.getInvertedPolarity() do
+        hs.eventtap.keyStroke({"ctrl", "alt", "cmd"}, "8")
     end
 end
 
 sitStandMenuBarItem = nil
 
-local function stopSitStandReminder()
+local function clearSitStandReminder()
     stopSitStandTimer()
-    resetSitStandScreenEffects()
+    setScreenPolarity(false)
     sitStandMenuBarItem:delete()
     sitStandMenuBarItem = nil
 end
@@ -87,25 +83,20 @@ end
 sitStandIntervalInSeconds = hs.timer.minutes(30)
 
 local function startSitStandReminder()
-    resetSitStandScreenEffects()
-    frame = hs.drawing.rectangle(hs.screen.primaryScreen():fullFrame())
-    frame:setFillColor({ ["red"] = 0, ["blue"] = 0, ["green"] = 1, ["alpha"] = 0.3 })
-    frame:setFill(true)
-    frame:bringToFront(true)
-
     stopSitStandTimer()
+    setScreenPolarity(false)
     sitStandTimer = hs.timer.doAfter(
         sitStandIntervalInSeconds,
         function()
             stopSitStandTimer()
-            frame:show(0.5)
+            setScreenPolarity(true)
         end
     )
 
     if not sitStandMenuBarItem then
         sitStandMenuBarItem = hs.menubar.new()
         sitStandMenuBarItem:setTitle("⇅")
-        sitStandMenuBarItem:setClickCallback(stopSitStandReminder)
+        sitStandMenuBarItem:setClickCallback(clearSitStandReminder)
     end
 end
 
