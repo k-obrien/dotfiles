@@ -38,7 +38,7 @@ git clone --recurse-submodules https://github.com/k-obrien/dotfiles.git ~/.dotfi
 brew bundle install --file ~/.dotfiles/brewfile
 
 echo -e "\nEnabling Homebrew autoupgrade..."
-brew autoupdate start --upgrade --cleanup --leaves-only
+brew autoupdate start --upgrade --cleanup --sudo --immediate
 
 echo
 fish -Pc "$(curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish) | source && fisher install jorgebucaran/fisher"
