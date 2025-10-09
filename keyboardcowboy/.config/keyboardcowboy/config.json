@@ -480,7 +480,161 @@
         "color" : "#B263EA",
         "id" : "175DF254-7E42-440B-B8BB-0E1D53BFA6D8",
         "name" : "Shortcuts",
-        "symbol" : "flowchart"
+        "symbol" : "flowchart",
+        "workflows" : [
+          {
+            "commands" : [
+              {
+                "runShortcut" : {
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "F35954F9-A711-4EAF-9AED-8DB1A4AD7A44",
+                    "name" : "Focus for 2 Hours"
+                  },
+                  "shortcutIdentifier" : "Focus for 2 Hours"
+                }
+              }
+            ],
+            "execution" : "serial",
+            "id" : "B4CDFF84-F0D9-424D-B53F-6BE6744BA36E",
+            "name" : "Focus for 2 Hours",
+            "trigger" : {
+              "keyboardShortcuts" : {
+                "allowRepeat" : false,
+                "shortcuts" : [
+                  {
+                    "id" : "8F671F5F-D0C4-4991-9CAB-A7B0BBAF442F",
+                    "key" : "f",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  },
+                  {
+                    "id" : "68951C21-7653-4CC2-AD0E-E200410EB17A",
+                    "key" : "2",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "commands" : [
+              {
+                "runShortcut" : {
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "37D714BC-4303-4C68-90C0-CC404A366DB1",
+                    "name" : "Focus for 1 Hour"
+                  },
+                  "shortcutIdentifier" : "Focus for 2 Hours"
+                }
+              }
+            ],
+            "execution" : "serial",
+            "id" : "D6CEA023-0B2D-4692-AD2F-1B173AEA9EFE",
+            "name" : "Focus for 1 Hour",
+            "trigger" : {
+              "keyboardShortcuts" : {
+                "allowRepeat" : false,
+                "shortcuts" : [
+                  {
+                    "id" : "AC70DBC6-46E7-4BDC-AE70-8524C30D44EF",
+                    "key" : "f",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  },
+                  {
+                    "id" : "4A6FB651-1A3D-4E0A-A111-9930027D9854",
+                    "key" : "1",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "commands" : [
+              {
+                "runShortcut" : {
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "F532C058-1E7C-405D-A7E4-55F264A08725",
+                    "name" : "Focus for Remainder of Day"
+                  },
+                  "shortcutIdentifier" : "Focus for 2 Hours"
+                }
+              }
+            ],
+            "execution" : "serial",
+            "id" : "0D91470D-6EE8-4BC4-BA62-AA30FD8401EE",
+            "name" : "Focus for Remainder of Day",
+            "trigger" : {
+              "keyboardShortcuts" : {
+                "allowRepeat" : false,
+                "shortcuts" : [
+                  {
+                    "id" : "AA3755BA-6CA0-4F18-A00D-6693F9D718C6",
+                    "key" : "f",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  },
+                  {
+                    "id" : "64A878B4-8D73-4577-AF87-B252E43D0731",
+                    "key" : "d",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "commands" : [
+              {
+                "runShortcut" : {
+                  "meta" : {
+                    "enabled" : true,
+                    "id" : "10A03058-6642-4F17-A72B-BC19C9AEEC45",
+                    "name" : "Disable Focus"
+                  },
+                  "shortcutIdentifier" : "Focus for 2 Hours"
+                }
+              }
+            ],
+            "execution" : "serial",
+            "id" : "BD9C20D9-A68F-4034-A19E-C3C7F5AC0AF3",
+            "name" : "Focus for Remainder of Day",
+            "trigger" : {
+              "keyboardShortcuts" : {
+                "allowRepeat" : false,
+                "shortcuts" : [
+                  {
+                    "id" : "2A4EFEB1-E23F-4E47-AF64-1164BD5A2A05",
+                    "key" : "f",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  },
+                  {
+                    "id" : "7849A03E-C330-450E-B7AB-DF8787B9663A",
+                    "key" : "u",
+                    "modifiers" : [
+                      "~"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ]
       },
       {
         "color" : "#5D5FDE",
@@ -499,7 +653,7 @@
         "id" : "8A3F5A6F-F876-49B4-BF10-D524A0D6A20E",
         "name" : "Microsoft Teams",
         "rule" : {
-          "bundleIdentifiers" : [
+          "allowedBundleIdentifiers" : [
             "com.microsoft.teams2"
           ],
           "id" : "6DF21DC4-0551-4FEF-BFE0-39C9F7034E1B"
@@ -737,7 +891,7 @@
         "id" : "C0000A97-FEBB-4DCD-A076-2E52DA2B5DB5",
         "name" : "Finder",
         "rule" : {
-          "bundleIdentifiers" : [
+          "allowedBundleIdentifiers" : [
             "com.apple.finder"
           ],
           "id" : "406E6CC6-945A-4A57-A16D-029D32698D1E"
@@ -958,7 +1112,7 @@
         "id" : "E148C1B3-02D3-466B-980E-74F9BE2144FA",
         "name" : "Slack",
         "rule" : {
-          "bundleIdentifiers" : [
+          "allowedBundleIdentifiers" : [
             "com.tinyspeck.slackmacgap"
           ],
           "id" : "1B0888AE-4050-4647-BC6D-E87F82625D86"
@@ -1064,7 +1218,7 @@
         "id" : "79D453B7-438D-4106-873B-11691E0532FC",
         "name" : "Microsoft Outlook",
         "rule" : {
-          "bundleIdentifiers" : [
+          "allowedBundleIdentifiers" : [
             "com.microsoft.Outlook"
           ],
           "id" : "F51682E5-7B35-4AAD-BFEB-43E1123D1164"
