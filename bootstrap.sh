@@ -43,25 +43,25 @@ brew autoupdate start --upgrade --cleanup --sudo --immediate
 echo
 fish -Pc "$(curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish) | source && fisher install jorgebucaran/fisher"
 
-mkdir -p ~/{.config/{gh,git,iterm2,keyboardcowboy,zsh},.dotfiles,.local/bin,Library/Application\ Support/VSCodium/User}
+mkdir -p ~/{.config/{gh,git,iterm2,zsh},.dotfiles,.local/bin,Library/Application\ Support/VSCodium/User}
 rm ~/.config/fish/config.fish ~/.config/fish/fish_plugins /opt/homebrew/bin/studio &> /dev/null || true
 cd ~/.dotfiles
-stow binaries codium fish fzffdignore git github-cli hammerspoon iterm2 keyboardcowboy zsh
+stow binaries codium fish fzffdignore git github-cli hammerspoon iterm2 zsh
 cd ~/
 
 echo -e "\nInstalling fish plugins..."
 fish -Pc "fisher update"
 
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "$email"
-/usr/bin/ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+ssh-keygen -t ed25519 -f ~/.ssh/github_ed25519 -C "$email"
+/usr/bin/ssh-add --apple-use-keychain ~/.ssh/github_ed25519
 
 git config --file ~/.config/git/config.local --add user.email "$email"
-git config --file ~/.config/git/config.local --add user.signingKey ~/.ssh/id_ed25519.pub
-awk '{ print $3, $1, $2 }' ~/.ssh/id_ed25519.pub > ~/.config/git/allowed_signers
+git config --file ~/.config/git/config.local --add user.signingKey ~/.ssh/github_ed25519.pub
+awk '{ print $3, $1, $2 }' ~/.ssh/github_ed25519.pub > ~/.config/git/allowed_signers
 
 echo -e "\nConfiguring GitHub CLI and keys..."
 gh auth login --git-protocol https --hostname github.com --web --scopes admin:public_key,write:ssh_signing_key,user
-gh ssh-key add ~/.ssh/id_ed25519.pub --title "$name" --type authentication
-gh ssh-key add ~/.ssh/id_ed25519.pub --title "$name" --type signing
+gh ssh-key add ~/.ssh/github_ed25519.pub --title "$name" --type authentication
+gh ssh-key add ~/.ssh/github_ed25519.pub --title "$name" --type signing
 gh api --method POST -H "Accept: application/vnd.github+json" /user/emails -f "emails[]=${email}" > /dev/null
 gh auth refresh --reset-scopes
