@@ -38,6 +38,7 @@ git clone --recurse-submodules https://github.com/k-obrien/dotfiles.git ~/.dotfi
 brew bundle install --file ~/.dotfiles/brewfile
 
 echo -e "\nEnabling Homebrew autoupgrade..."
+mkdir -p ~/Library/LaunchAgents
 brew autoupdate start --upgrade --cleanup --sudo --immediate
 
 echo
