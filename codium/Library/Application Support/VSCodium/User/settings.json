@@ -15,4 +15,5 @@
 	"editor.renderWhitespace": "all",
 	"workbench.preferredHighContrastColorTheme": "Default Dark Modern",
 	"workbench.preferredHighContrastLightColorTheme": "Default Light Modern",
+	"workbench.settings.showAISearchToggle": false,
 }
