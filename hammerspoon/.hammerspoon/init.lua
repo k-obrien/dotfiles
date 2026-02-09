@@ -27,8 +27,8 @@ if loadSpoon("ReloadConfiguration") then
     spoon.ReloadConfiguration:start()
 end
 
--- Global modifier key; assigned to Caps Lock
-modifier = { "ctrl", "cmd", "alt", "shift" }
+-- Define Hyper Key
+hyper = { "ctrl", "cmd", "alt", "shift" }
 
 -- >>> Apply a predefined window layout
 local function applyWindowLayout()
@@ -52,7 +52,7 @@ local function applyWindowLayout()
     hs.layout.apply(primaryScreen == internalScreen and notebookLayout or desktopLayout)
 end
 
-hs.hotkey.bind(modifier, "l", "Layout Windows", applyWindowLayout)
+hs.hotkey.bind(hyper, "l", "Layout Windows", applyWindowLayout)
 -- <<<
 
 -- >>> Toggle mute on Slack and Teams
@@ -64,7 +64,7 @@ local function toggleChatMicMute()
     if slack then hs.eventtap.keyStroke(modifier, "space", 0, slack) end
 end
 
-hs.hotkey.bind(modifier, "a", "Toggle Chat Microphone Mute", toggleChatMicMute)
+hs.hotkey.bind(hyper, "m", "Toggle Chat Microphone Mute", toggleChatMicMute)
 -- <<<
 
 -- >>> Sit/Stand Reminder
@@ -112,7 +112,7 @@ local function startSitStandReminder()
     end
 end
 
-hs.hotkey.bind(modifier, "d", startSitStandReminder)
+hs.hotkey.bind(hyper, "d", startSitStandReminder)
 -- <<<
 
 -- >>> Show Phonetic Alphabet
@@ -121,11 +121,11 @@ local function showPhoneticAlphabet()
     hs.alert.show(alphabet, { atScreenEdge = 0 }, "infinite")
 end
 
-hs.hotkey.bind(modifier, "p", "Phonetic Alphabet", showPhoneticAlphabet, hs.alert.closeAll)
+hs.hotkey.bind(hyper, "p", "Phonetic Alphabet", showPhoneticAlphabet, hs.alert.closeAll)
 -- <<<
 
 -- >>> Defeat paste-blocking
-hs.hotkey.bind(modifier, "v", "Paste clipboard contents", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+hs.hotkey.bind(hyper, "v", "Paste clipboard contents", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 -- <<<
 
 -- >>> Call functions on system state changes
