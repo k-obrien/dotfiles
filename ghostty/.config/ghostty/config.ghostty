@@ -1,0 +1,8 @@
+background = #000000
+background-opacity = 0.7
+bell-features = no-audio
+command = /opt/homebrew/bin/fish
+quit-after-last-window-closed = true
+scrollbar = never
+window-height = 40
+window-width = 160
