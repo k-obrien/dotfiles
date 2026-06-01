@@ -3,7 +3,7 @@ function keys
       set_color --bold blue; printf $argv[1]; set_color normal; printf ": "; set_color --italics; echo $argv[2]
    end
 
-   decorate "   ⌥B" "Belay current command"
+   decorate "   ⌥D" "Defer current command"
    decorate "   ⌥S" "Prepend sudo to current or previous command"
    decorate "   ⌥E" "Edit command in editor"
    decorate "   ⌥C" "Capitalise first letter of word under cursor"
@@ -17,8 +17,8 @@ function keys
    decorate "⌥[←→]" "Move cursor one inclusive word OR navigate directory stack"
    decorate "⇧[←→]" "Move cursor one exclusive word OR accept big word of autosuggestion"
    echo
-   decorate "   ⌥W" "Show short description of app under cursor"
-   decorate "   ⌥H" "Show manpage for app under cursor"
+   decorate "   ⌥W" "Show short description of command under cursor"
+   decorate "   ⌥H" "Show manpage for command under cursor"
    decorate "   ⌥L" "List contents of directory under cursor or current directory"
    echo
    decorate "   ^R" "Search command history"

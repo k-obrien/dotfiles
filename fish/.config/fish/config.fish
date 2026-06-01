@@ -73,5 +73,5 @@ if status is-interactive
         source ~/.config/fish/config.fish.local
     end
 
-    bind --user \eb push-line
+    bind --user \ed push-line
 end
