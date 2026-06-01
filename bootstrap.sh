@@ -44,10 +44,10 @@ brew autoupdate start --upgrade --cleanup --sudo --immediate
 echo
 fish -Pc "$(curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish) | source && fisher install jorgebucaran/fisher"
 
-mkdir -p ~/{.config/{gh,git,iterm2,zsh},.dotfiles,.local/bin,Library/Application\ Support/VSCodium/User}
+mkdir -p ~/{.config/{gh,git,zsh},.dotfiles,.local/bin,Library/Application\ Support/VSCodium/User}
 rm ~/.config/fish/config.fish ~/.config/fish/fish_plugins /opt/homebrew/bin/studio &> /dev/null || true
 cd ~/.dotfiles
-stow binaries codium fish fzffdignore git github-cli hammerspoon iterm2 zsh
+stow binaries codium fish fzffdignore git github-cli hammerspoon zsh
 cd ~/
 
 echo -e "\nInstalling fish plugins..."
