@@ -6,3 +6,4 @@ quit-after-last-window-closed = true
 scrollbar = never
 window-height = 40
 window-width = 160
+macos-option-as-alt = true
