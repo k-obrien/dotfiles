@@ -22,6 +22,7 @@ if status is-interactive
 
     set -g fish_greeting
 
+    set -gx tide_character_vi_icon_default "❯"
     set -U tide_character_icon \u276f
     set -U tide_jobs_icon \u2699
     set -U tide_left_prompt_frame_enabled false
