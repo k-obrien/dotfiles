@@ -84,37 +84,32 @@
 
 [alias]
     alias = ! git config --get-regexp alias | cut -c 7-
-    ec = config --global -e
+    edit-config = config --global -e
     clone-with-submodules = clone --recurse-submodules
     clone-submodules = submodule update --init --recursive
-    st = status -s
+    state = status -s
     last = log -1 HEAD
     ls = log --date=format:'%Y/%m/%d %H:%M' --pretty=format:'%C(yellow)%h%C(reset) %C(green)%cd%C(reset) %<(20,mtrunc)%C(blue)%an%C(reset) %s'
-    difflog = log -u
+    log-with-diff = log -u
     staged = diff --staged
-    sw = switch
-    co = checkout
-    nb = "! [ $# -gt 0 ] && git fetch origin "${2:-$(basename "$(git default-branch)")}":"$1" && git checkout "$1" #"
-    aa = add -A
-    ci = commit -m
-    ca = ! git aa && git ci
-    ac = commit --amend --no-edit
-    am = commit --amend -m
-    aac = ! git aa && git ac
-    aam = ! git aa && git am
-    pushf = push --force-with-lease
-    uncommit = reset HEAD~
-    unstage = restore --staged
-    discard = restore --staged --worktree
-    untrack = rm --cached
-    skip = update-index --skip-worktree
-    noskip = update-index --no-skip-worktree
-    sls = stash list
-    spop = stash pop
-    sshow = stash show -p
+    sprout = "! [ $# -gt 0 ] && git fetch origin "${2:-$(basename "$(git default-branch)")}":"$1" && git checkout "$1" #"
+    add-all = add -A
+    save = commit -m
+    save-all = ! git add-all && git save
+    amend-commit = commit --amend --no-edit
+    amend-message = commit --amend -m
+    add-all-and-amend-commit = ! git add-all && git amend-commit
+    add-all-and-amend-message = ! git add-all && git amend-message
+    nudge = push --force-with-lease
+    undo-commit = reset HEAD~
+    unstage-changes = restore --staged
+    discard-changes = restore --staged --worktree
+    untrack-file = rm --cached
+    ignore-tracked-changes = update-index --skip-worktree
+    follow-tracked-changes = update-index --no-skip-worktree
     default-branch = symbolic-ref refs/remotes/origin/HEAD --short
     branches = for-each-ref refs/heads --sort=committerdate --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:human)%(color:reset))'
     merged = "! _base_branch=${2:-$(git default-branch)}; git fetch -q && git branch --merged "$_base_branch" | grep -v "$_base_branch" | grep -v '^[*+]' #"
-    cull = ! git merged | xargs git branch -d
-    burn = ! git merged | xargs git branch -D
+    delete-merged = ! git merged | xargs git branch -d
+    delete-merged-forced = ! git merged | xargs git branch -D
     absorb = ! git-absorb
