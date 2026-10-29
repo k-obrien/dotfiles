@@ -1,40 +1,71 @@
-tap "domt4/autoupdate"
+tap "domt4/autoupdate", trusted: true
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# More intuitive version of du in rust
 brew "dust"
+# Modern, maintained replacement for ls
 brew "eza"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
 brew "gh"
+# Distributed revision control system
 brew "git"
+# Automatic git commit --fixup
 brew "git-absorb"
+# Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Pager program similar to more
 brew "less"
+# Deep clean and optimize your Mac
+brew "mole"
+# OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
+# Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Modern replacement for ps written in Rust
 brew "procs"
+# Show ps output as a tree
 brew "pstree"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Autoformat shell script source code
 brew "shfmt"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Blazingly fast terminal recorder that generates animated gif images for the web
 brew "t-rec"
+# Generator for LS_COLORS with support for multiple color themes
 brew "vivid"
+# Internet file retriever
 brew "wget"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
-cask "bambu-studio"
-cask "firefox"
+# Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Desktop automation application
 cask "hammerspoon"
+# JetBrains tools manager
 cask "jetbrains-toolbox"
+# File archiver
 cask "keka"
-cask "keymapp"
+# Tool to control external monitor brightness & volume
 cask "monitorcontrol"
+# Control your tools with a few keystrokes
 cask "raycast"
-cask "signal"
-cask "utm"
+# Binary releases of VS Code without MS branding/telemetry/licensing
 cask "vscodium"
-vscode "leathong.openscad-language-support"
+vscode "earshinov.permute-lines"
+vscode "fwcd.kotlin"
