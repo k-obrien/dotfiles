@@ -29,6 +29,7 @@ end
 
 -- Define Hyper Key
 hyper = { "ctrl", "cmd", "alt", "shift" }
+meh = { "ctrl", "alt", "shift" }
 
 -- >>> Apply a predefined window layout
 local function applyWindowLayout()
@@ -55,16 +56,18 @@ end
 hs.hotkey.bind(hyper, "l", "Layout Windows", applyWindowLayout)
 -- <<<
 
--- >>> Toggle mute on Slack and Teams
-local function toggleChatMicMute() 
+-- >>> Control Slack and Teams video calls
+local function controlSlackOrTeams(slackKey, teamsKey)
     local modifier = {"cmd", "shift"}
-    local teams = hs.application.get("com.microsoft.teams2")
-    if teams then hs.eventtap.keyStroke(modifier, "m", 0, teams) end
     local slack = hs.application.get("com.tinyspeck.slackmacgap")
-    if slack then hs.eventtap.keyStroke(modifier, "space", 0, slack) end
+    if slackKey and slack then hs.eventtap.keyStroke(modifier, slackKey, 0, slack) end
+    local teams = hs.application.get("com.microsoft.teams2")
+    if teams then hs.eventtap.keyStroke(modifier, teamsKey, 0, teams) end
 end
 
-hs.hotkey.bind(hyper, "m", "Toggle Chat Microphone Mute", toggleChatMicMute)
+hs.hotkey.bind(meh, "m", "Toggle Microphone", function() controlSlackOrTeams("space", "m") end)
+hs.hotkey.bind(meh, "c", "Toggle Camera", function() controlSlackOrTeams(nil, "o") end)
+hs.hotkey.bind(meh, "h", "End Call", function() controlSlackOrTeams("h", "h") end)
 -- <<<
 
 -- >>> Sit/Stand Reminder
