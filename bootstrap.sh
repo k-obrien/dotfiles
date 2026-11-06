@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-set -o errexit  # exit immediately upon error
-set -o pipefail # surface errors in pipes
-set -o nounset  # prohibit undefined variables
+set -o errexit      # exit immediately upon error
+set -o pipefail     # surface errors in pipes
+set -o nounset      # prohibit undefined variables
+shopt -s nullglob   # expand unmatched glob patterns to null
 IFS=$'\n\t'     # split on newline or tab by default
 
 function _show_usage() {
@@ -47,7 +48,8 @@ fish -Pc "$(curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/mai
 mkdir -p ~/{.config/{gh,git,zsh},.dotfiles,.local/bin,Library/Application\ Support/VSCodium/User}
 rm ~/.config/fish/config.fish ~/.config/fish/fish_plugins /opt/homebrew/bin/studio &> /dev/null || true
 cd ~/.dotfiles
-stow binaries codium fish fzffdignore git github-cli hammerspoon zsh
+packages=( */ )
+stow "${packages[@]%/}"
 cd ~/
 
 echo -e "\nInstalling fish plugins..."
