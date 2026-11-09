@@ -40,22 +40,6 @@ if status is-interactive
     set -gx fzf_fd_opts --ignore-file ~/.config/fzffd/fzffdignore
     set -gx fzf_preview_dir_cmd eza --color=always --oneline
 
-    type -q bat && abbr -a cat bat
-    type -q dust && abbr -a du dust
-    type -q procs && abbr -a ps procs
-    type -q rg && abbr -a grep "rg -e"
-
-    if type -q codium
-        abbr -a edit codium
-        abbr -a diff codium --diff
-        abbr -a merge codium --merge
-    end
-
-    if type -q fd
-        abbr -a find fd
-        abbr -a find! fd --no-ignore --hidden
-    end
-
     if type -q eza
         abbr -a ls eza --group-directories-first
         abbr -a ls! eza --group-directories-first --all
@@ -65,9 +49,31 @@ if status is-interactive
         abbr -a tree! eza --group-directories-first --tree --all
     end
 
+    if type -q fd
+        abbr -a fd! fd --no-ignore --hidden
+        abbr -a find fd
+        abbr -a find! fd --no-ignore --hidden
+    end
+
+    if type -q rg
+        abbr -a rg! rg --hidden --no-ignore
+        abbr -a grep rg
+        abbr -a grep! rg --hidden --no-ignore
+    end        
+
+    if type -q codium
+        abbr -a edit codium
+        abbr -a diff codium --diff
+        abbr -a merge codium --merge
+    end
+
+    type -q bat && abbr -a cat bat
+    type -q dust && abbr -a du dust
+    type -q procs && abbr -a ps procs
+
+    bind --user \ed push-line
+
     if test -f ~/.config/fish/config.fish.local
         source ~/.config/fish/config.fish.local
     end
-
-    bind --user \ed push-line
 end
