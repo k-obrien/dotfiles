@@ -14,7 +14,7 @@ if status is-interactive
     set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
     set -gx LESS --IGNORE-CASE --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --status-column --tabs=4 --window=-4
 
-    type -q codium && set -gx VISUAL codium --wait
+    type -q zed && set -gx VISUAL zed --wait
 
     type -q vivid && set -gx LS_COLORS (vivid generate jellybeans)
     
@@ -59,10 +59,11 @@ if status is-interactive
         abbr -a rg! rg --hidden --no-ignore
         abbr -a grep rg
         abbr -a grep! rg --hidden --no-ignore
-    end        
+    end   
+
+    type -q zed && abbr -a edit zed
 
     if type -q codium
-        abbr -a edit codium
         abbr -a diff codium --diff
         abbr -a merge codium --merge
     end
