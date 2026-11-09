@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-
-source common || exit 1
-
-_depend_on shasum
-
-[[ "$#" -ne 3 ]] || [[ ! -f "$3" ]] && _error_exit "Usage: ${0##*/} algorithm checksum filename"
-
-shasum -a "$1" -c <(echo "${2}  ${3}")

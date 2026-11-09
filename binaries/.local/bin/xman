@@ -1,3 +1,4 @@
 #!/usr/bin/env zsh
 
-open -a terminal x-man-page://"${1}"
+# open -a terminal x-man-page://"${1}"
+open -na Ghostty.app --args -e halp "${1}"
